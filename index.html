@@ -13,7 +13,6 @@ body {
   text-align: center;
 }
 
-/* HEADER */
 .header {
   padding: 20px;
 }
@@ -33,7 +32,6 @@ body {
   opacity: 0.8;
 }
 
-/* CONTAINER */
 .container {
   display: flex;
   justify-content: center;
@@ -42,7 +40,6 @@ body {
   flex-wrap: wrap;
 }
 
-/* CARD */
 .card {
   width: 260px;
   height: 200px;
@@ -55,7 +52,6 @@ body {
   overflow: hidden;
 }
 
-/* NEON */
 .card::before {
   content: "";
   position: absolute;
@@ -73,18 +69,15 @@ body {
   100% { filter: blur(12px) hue-rotate(360deg); }
 }
 
-/* HOVER */
 .card:hover {
   transform: scale(1.05);
 }
 
-/* ICON */
 .icon {
   font-size: 45px;
   margin-top: 40px;
 }
 
-/* TEXT */
 .card h2 {
   margin: 10px 0 0;
 }
@@ -95,12 +88,10 @@ body {
   padding: 0 15px;
 }
 
-/* COLORS */
 .tamu { background: linear-gradient(135deg, #065f46, #022c22); }
 .surat { background: linear-gradient(135deg, #1e3a8a, #0c1c4d); }
 .aduan { background: linear-gradient(135deg, #6b21a8, #2e1065); }
 
-/* FOOTER */
 .footer {
   margin-top: 10px;
   font-size: 14px;
@@ -112,8 +103,7 @@ body {
 <body>
 
 <div class="header">
-  <!-- GANTI LINK LOGO DI SINI -->
-  <img src="LINK_LOGO_KAMU" class="logo">
+  <img src="https://website.desa.id/assets/files/data/website-desa-muning-baru-6306072001/images/bumdes/LGO_DESA_2022_1_.png" class="logo">
   
   <h1>PELAYANAN DIGITAL</h1>
   <div class="clock" id="clock"></div>
@@ -121,19 +111,19 @@ body {
 
 <div class="container">
 
-<div class="card tamu" onclick="goLink('LINK_BUKU_TAMU')">
+<div class="card tamu" onclick="goLink('https://forms.gle/8ipvJkeh76VHPsAW8')">
   <div class="icon">📖</div>
   <h2>Buku Tamu</h2>
   <p>Isi kehadiran</p>
 </div>
 
-<div class="card surat" onclick="goLink('LINK_SURAT')">
+<div class="card surat" onclick="goLink('https://www.instagram.com/p/DXZDY5OEjw9/?igsh=MW0ybTZ1NW1mbTVjdQ==')">
   <div class="icon">📄</div>
   <h2>Pelayanan Surat</h2>
   <p>Lihat persyaratan</p>
 </div>
 
-<div class="card aduan" onclick="goLink('LINK_ADUAN')">
+<div class="card aduan" onclick="goLink('https://forms.gle/o864Q2Jdh42QEXRB7')">
   <div class="icon">💬</div>
   <h2>Aduan & Saran</h2>
   <p>Sampaikan masukan</p>
@@ -145,13 +135,11 @@ body {
   Desa Muning Baru • Melayani dengan sepenuh hati 💛
 </div>
 
-<!-- SUARA KLIK -->
 <audio id="clickSound">
   <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// JAM REALTIME
 function updateClock() {
   const now = new Date();
   const time = now.toLocaleTimeString('id-ID');
@@ -161,7 +149,6 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// SUARA + NAVIGASI
 function goLink(url) {
   document.getElementById("clickSound").play();
   setTimeout(() => {
