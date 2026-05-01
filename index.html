@@ -1,18 +1,80 @@
-<map name="menu-desa">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pelayanan Desa Muning Baru</title>
 
-<!-- 1. Buku Tamu -->
-<area shape="rect" coords="80,480,580,1080"
-href="https://forms.gle/8ipvJkeh76VHPsAW8"
-target="_blank" rel="noopener noreferrer">
+<style>
+body {
+    margin: 0;
+    background: #0b0b0b;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
 
-<!-- 2. Pelayanan Surat -->
-<area shape="rect" coords="620,480,1120,1080"
-href="https://www.instagram.com/p/DXZDY5OEjw9/?igsh=MW0ybTZ1NW1mbTVjdQ=="
-target="_blank" rel="noopener noreferrer">
+/* Container */
+.wrapper {
+    position: relative;
+    max-width: 1200px;
+    margin: auto;
+}
 
-<!-- 3. Aduan & Saran -->
-<area shape="rect" coords="1160,480,1660,1080"
-href="https://forms.gle/o864Q2Jdh42QEXRB7"
-target="_blank" rel="noopener noreferrer">
+/* Gambar */
+.wrapper img {
+    width: 100%;
+    display: block;
+}
 
-</map>
+/* Tombol overlay */
+.btn {
+    position: absolute;
+    width: 28%;
+    height: 35%;
+    top: 45%;
+    cursor: pointer;
+}
+
+/* Posisi masing-masing */
+.btn1 { left: 5%; }
+.btn2 { left: 36%; }
+.btn3 { left: 67%; }
+
+/* Hover efek */
+.btn:hover {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    transition: 0.3s;
+}
+</style>
+
+</head>
+<body>
+
+<h2 style="color:white; margin:20px;">
+Pelayanan Digital Desa Muning Baru
+</h2>
+
+<div class="wrapper">
+
+    <img src="template-pelayanan.png">
+
+    <!-- Buku Tamu -->
+    <a href="https://forms.gle/8ipvJkeh76VHPsAW8" target="_blank">
+        <div class="btn btn1"></div>
+    </a>
+
+    <!-- Pelayanan Surat -->
+    <a href="https://www.instagram.com/p/DXZDY5OEjw9/?igsh=MW0ybTZ1NW1mbTVjdQ==" target="_blank">
+        <div class="btn btn2"></div>
+    </a>
+
+    <!-- Aduan & Saran -->
+    <a href="https://forms.gle/o864Q2Jdh42QEXRB7" target="_blank">
+        <div class="btn btn3"></div>
+    </a>
+
+</div>
+
+</body>
+</html>
