@@ -6,254 +6,185 @@
 <title>Desa Muning Baru</title>
 
 <style>
-:root{
-  --primary:#0f766e;
-  --dark:#0b0b0b;
-  --card:#121212;
-  --muted:#9ca3af;
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background:var(--dark);
-  color:white;
+body {
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background:#0b0b0b;
+    color:white;
 }
 
 /* NAVBAR */
-.navbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 24px;
-  background:#111;
-  position:sticky;
-  top:0;
-  z-index:1000;
+.navbar {
+    display:flex;
+    justify-content:space-between;
+    padding:15px 30px;
+    background:#111;
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.brand img{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-}
-
-.navbar a{
-  color:white;
-  text-decoration:none;
-  margin-left:16px;
-  font-size:14px;
+.navbar h2 {margin:0;}
+.navbar a {
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
 }
 
 /* HERO */
-.hero{
-  position:relative;
+.hero img {
+    width:100%;
 }
 
-.hero img{
-  width:100%;
-  height:300px;
-  object-fit:cover;
-  opacity:0.6;
+/* MENU */
+.menu {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    padding:30px;
 }
 
-.hero-text{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  text-align:center;
+.card {
+    width:300px;
+    border-radius:20px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
+    background:#1a1a1a;
 }
 
-.hero-text h1{
-  margin:0;
-  font-size:32px;
+.card:hover {
+    transform:scale(1.05);
 }
 
-.hero-text p{
-  color:#ddd;
+.card img {
+    width:100%;
 }
 
-/* SECTION */
-.section{
-  padding:40px 20px;
-  max-width:1100px;
-  margin:auto;
+.card h3 {
+    text-align:center;
+    padding:15px;
 }
 
-.section h2{
-  text-align:center;
-  margin-bottom:20px;
+/* MODAL */
+.modal {
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    z-index:2000;
 }
 
-/* CARDS */
-.grid{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
+.modal-content {
+    width:90%;
+    height:90%;
+    margin:3% auto;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
 }
 
-.card{
-  background:var(--card);
-  width:280px;
-  border-radius:16px;
-  padding:20px;
-  text-align:center;
-  cursor:pointer;
-  transition:0.3s;
+.modal iframe {
+    width:100%;
+    height:100%;
+    border:none;
 }
 
-.card:hover{
-  transform:translateY(-5px);
-  background:#1c1c1c;
-}
-
-.icon{
-  font-size:40px;
-  margin-bottom:10px;
-}
-
-/* BUTTON */
-.btn{
-  display:inline-block;
-  margin-top:10px;
-  padding:10px 16px;
-  background:var(--primary);
-  color:white;
-  border-radius:8px;
-  text-decoration:none;
-}
-
-/* INFO */
-.info{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
-
-.info div{
-  background:#111;
-  padding:20px;
-  border-radius:12px;
+/* CLOSE */
+.close {
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:30px;
+    cursor:pointer;
+    color:white;
 }
 
 /* FOOTER */
-.footer{
-  background:#111;
-  padding:20px;
-  text-align:center;
-  font-size:14px;
-  color:var(--muted);
+.footer {
+    text-align:center;
+    padding:20px;
+    background:#111;
 }
 
 /* RESPONSIVE */
 @media(max-width:768px){
-  .grid{flex-direction:column; align-items:center;}
-  .info{grid-template-columns:1fr;}
+    .menu {
+        flex-direction:column;
+        align-items:center;
+    }
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="brand">
-    <img src="logo-desa.png" onerror="this.src='https://via.placeholder.com/40'">
-    <strong>Desa Muning Baru</strong>
-  </div>
-  <div>
-    <a href="#">Home</a>
-    <a href="#layanan">Layanan</a>
-    <a href="#profil">Profil</a>
-    <a href="#kontak">Kontak</a>
-  </div>
+    <h2>Desa Muning Baru</h2>
+    <div>
+        <a href="#">Home</a>
+        <a href="#layanan">Layanan</a>
+        <a href="#">Kontak</a>
+    </div>
 </div>
 
 <!-- HERO -->
 <div class="hero">
-  <img src="template-pelayanan.png">
-  <div class="hero-text">
-    <h1>Website Resmi Desa Muning Baru</h1>
-    <p>Melayani Masyarakat Secara Cepat & Transparan</p>
-  </div>
+    <img src="template-pelayanan.png">
 </div>
 
-<!-- LAYANAN -->
-<div id="layanan" class="section">
-  <h2>Layanan Desa</h2>
-  <div class="grid">
+<!-- MENU -->
+<div id="layanan" class="menu">
 
-    <div class="card" onclick="openLink('https://forms.gle/8ipvJkeh76VHPsAW8')">
-      <div class="icon">📋</div>
-      <h3>Buku Tamu</h3>
-      <p>Isi kunjungan masyarakat</p>
+    <!-- Buku Tamu -->
+    <div class="card" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
+        <img src="template-pelayanan.png">
+        <h3>Buku Tamu</h3>
     </div>
 
-    <div class="card" onclick="openLink('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')">
-      <div class="icon">📄</div>
-      <h3>Pelayanan Surat</h3>
-      <p>Pengajuan surat online</p>
+    <!-- Pelayanan Surat (dibuka tab baru) -->
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform" target="_blank">
+        <div class="card">
+            <img src="template-pelayanan.png">
+            <h3>Pelayanan Surat</h3>
+        </div>
+    </a>
+
+    <!-- Aduan & Saran -->
+    <div class="card" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">
+        <img src="template-pelayanan.png">
+        <h3>Aduan & Saran</h3>
     </div>
 
-    <div class="card" onclick="openLink('https://forms.gle/o864Q2Jdh42QEXRB7')">
-      <div class="icon">💬</div>
-      <h3>Aduan & Saran</h3>
-      <p>Sampaikan aspirasi</p>
-    </div>
-
-  </div>
 </div>
 
-<!-- PROFIL -->
-<div id="profil" class="section">
-  <h2>Profil Desa</h2>
-  <div class="info">
-    <div>
-      <h3>Visi</h3>
-      <p>Mewujudkan desa maju, mandiri, dan sejahtera.</p>
+<!-- MODAL -->
+<div id="modal" class="modal">
+    <span class="close" onclick="closeModal()">✖</span>
+    <div class="modal-content">
+        <iframe id="frame" loading="lazy"></iframe>
     </div>
-    <div>
-      <h3>Misi</h3>
-      <p>Meningkatkan pelayanan, transparansi, dan pembangunan desa.</p>
-    </div>
-  </div>
-</div>
-
-<!-- KONTAK -->
-<div id="kontak" class="section">
-  <h2>Kontak Desa</h2>
-  <div class="info">
-    <div>
-      <p>📍 Alamat: Desa Muning Baru</p>
-      <p>📞 WA: 08xxxxxxxxxx</p>
-      <p>✉️ Email: desa@email.com</p>
-    </div>
-    <div>
-      <p>Jam Pelayanan:</p>
-      <p>Senin - Jumat</p>
-      <p>08.00 - 14.00</p>
-    </div>
-  </div>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-  © 2026 Desa Muning Baru — Website Resmi Pemerintah Desa
+    © 2026 Desa Muning Baru - Melayani Sepenuh Hati
 </div>
 
 <script>
-function openLink(url){
-  window.open(url, "_blank");
+function openModal(link){
+    document.getElementById("modal").style.display="block";
+    document.getElementById("frame").src=link;
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+    document.getElementById("frame").src="";
 }
 </script>
 
