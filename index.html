@@ -17,7 +17,6 @@ body {
 h2 {
     color:white;
     margin:20px;
-    letter-spacing:1px;
 }
 
 /* CONTAINER */
@@ -25,6 +24,7 @@ h2 {
     position:relative;
     max-width:1000px;
     margin:auto;
+    animation:fadeUp 1s ease;
 }
 
 /* GAMBAR */
@@ -34,14 +34,14 @@ h2 {
     border-radius:20px;
 }
 
-/* OVERLAY GELAP */
+/* OVERLAY */
 .overlay {
     position:absolute;
     top:0;
     left:0;
     width:100%;
     height:100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.25), rgba(0,0,0,0.05));
+    background:linear-gradient(to top, rgba(0,0,0,0.25), transparent);
     border-radius:20px;
 }
 
@@ -62,11 +62,11 @@ h2 {
 .btn2 { left:36%; }
 .btn3 { left:67%; }
 
-/* EFEK HOVER WOW */
+/* EFEK HOVER */
 .btn:hover {
     background:rgba(255,255,255,0.1);
-    box-shadow:0 0 25px rgba(0,255,200,0.6);
-    transform:translateY(-50%) scale(1.05);
+    box-shadow:0 0 20px rgba(0,255,200,0.5);
+    transform:translateY(-55%) scale(1.05);
 }
 
 /* ANIMASI MASUK */
@@ -75,15 +75,35 @@ h2 {
     to {opacity:1; transform:translateY(0);}
 }
 
-.wrapper {
-    animation:fadeUp 1s ease;
+/* RUNNING TEXT */
+.running-text {
+    width:100%;
+    overflow:hidden;
+    background:linear-gradient(90deg,#00c6ff,#0072ff);
+    color:white;
+    padding:10px 0;
+    margin-top:20px;
+    box-shadow:0 0 15px rgba(0,255,200,0.4);
+}
+
+.running-text p {
+    display:inline-block;
+    white-space:nowrap;
+    animation:jalan 12s linear infinite;
+    font-weight:bold;
+}
+
+/* ANIMASI TEKS */
+@keyframes jalan {
+    from { transform:translateX(100%); }
+    to { transform:translateX(-100%); }
 }
 
 /* RESPONSIVE */
 @media(max-width:768px){
     .btn {
-        height:30%;
-        top:55%;
+        height:40%;
+        top:62%;
     }
 }
 </style>
@@ -108,6 +128,11 @@ h2 {
     <!-- Aduan -->
     <div class="btn btn3" onclick="buka('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
 
+</div>
+
+<!-- RUNNING TEXT -->
+<div class="running-text">
+    <p>✨ SELAMAT DATANG DI PELAYANAN KANTOR DESA MUNING BARU ✨</p>
 </div>
 
 <script>
