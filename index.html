@@ -1,61 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Pelayanan Digital Desa Muning Baru</title>
-
+<title>Pelayanan Desa Muning Baru</title>
 <style>
-body {
-  margin: 0;
-  background: black;
-  display: flex;
-  justify-content: center;
-}
-
-.container {
-  position: relative;
-  max-width: 1000px;
-}
-
-.container img {
-  width: 100%;
-  display: block;
-}
-
-/* AREA KLIK */
-.btn {
-  position: absolute;
-  width: 26%;
-  height: 14%;
-  bottom: 18%;
-  cursor: pointer;
-}
-
-/* POSISI */
-.buku { left: 6%; }
-.surat { left: 37%; }
-.aduan { right: 6%; }
-
+    body {
+        margin: 0;
+        background: #0b0b0b;
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<img src="template pelayanan.png" usemap="#menu-desa">
 
-<img src="https://drive.google.com/uc?export=view&id=1-MvVKmJZbKI56pCFLngp24E7odhe_K3x">
+<map name="menu-desa">
 
-<div class="btn buku" onclick="go('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
-<div class="btn surat" onclick="go('https://www.instagram.com/p/DXZDY5OEjw9/?igsh=MW0ybTZ1NW1mbTVjdQ==')"></div>
-<div class="btn aduan" onclick="go('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
+    <!-- 1. Buku Tamu -->
+    <area shape="rect" coords="100,500,600,1100"
+    href="https://forms.gle/8ipvJkeh76VHPsAW8"
+    target="_blank">
 
-</div>
+    <!-- 2. Pelayanan Surat -->
+    <area shape="rect" coords="650,500,1150,1100"
+    href="https://www.instagram.com/p/DXZDY5OEjw9/?igsh=MW0ybTZ1NW1mbTVjdQ=="
+    target="_blank">
 
-<script>
-function go(url){
-  window.location.href = url;
-}
-</script>
+    <!-- 3. Aduan & Saran -->
+    <area shape="rect" coords="1200,500,1700,1100"
+    href="https://forms.gle/o864Q2Jdh42QEXRB7"
+    target="_blank">
+
+</map>
 
 </body>
 </html>
