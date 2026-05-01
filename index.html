@@ -24,13 +24,11 @@ h2 {
     position:relative;
     max-width:1000px;
     margin:auto;
-    animation:fadeUp 1s ease;
 }
 
 /* GAMBAR */
 .wrapper img {
     width:100%;
-    display:block;
     border-radius:20px;
 }
 
@@ -54,7 +52,6 @@ h2 {
     transform:translateY(-55%);
     cursor:pointer;
     border-radius:20px;
-    transition:0.3s;
 }
 
 /* POSISI */
@@ -66,13 +63,82 @@ h2 {
 .btn:hover {
     background:rgba(255,255,255,0.1);
     box-shadow:0 0 20px rgba(0,255,200,0.5);
-    transform:translateY(-55%) scale(1.05);
 }
 
-/* ANIMASI MASUK */
-@keyframes fadeUp {
-    from {opacity:0; transform:translateY(30px);}
-    to {opacity:1; transform:translateY(0);}
+/* ========================= */
+/* JAM REALISTIS */
+/* ========================= */
+
+.clock {
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:120px;
+    height:120px;
+    border:6px solid black;
+    border-radius:50%;
+    background:white;
+    box-shadow:0 0 15px rgba(0,0,0,0.6);
+}
+
+/* angka */
+.number {
+    position:absolute;
+    width:100%;
+    height:100%;
+    text-align:center;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.number span {
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.n12 span { top:5px; }
+.n3 span { right:5px; top:50%; transform:translateY(-50%); }
+.n6 span { bottom:5px; }
+.n9 span { left:5px; top:50%; transform:translateY(-50%); }
+
+/* jarum */
+.hand {
+    position:absolute;
+    bottom:50%;
+    left:50%;
+    transform-origin:bottom;
+    transform:translateX(-50%);
+}
+
+.hour {
+    width:4px;
+    height:30px;
+    background:black;
+}
+
+.minute {
+    width:3px;
+    height:40px;
+    background:black;
+}
+
+.second {
+    width:2px;
+    height:45px;
+    background:red;
+}
+
+/* titik tengah */
+.center {
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:red;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
 }
 
 /* RUNNING TEXT */
@@ -83,7 +149,6 @@ h2 {
     color:white;
     padding:10px 0;
     margin-top:20px;
-    box-shadow:0 0 15px rgba(0,255,200,0.4);
 }
 
 .running-text p {
@@ -93,39 +158,21 @@ h2 {
     font-weight:bold;
 }
 
-/* ANIMASI TEKS */
 @keyframes jalan {
     from { transform:translateX(100%); }
     to { transform:translateX(-100%); }
 }
 
-/* JAM ANALOG */
-#clock {
-    position:absolute;
-    top:20px;
-    right:20px;
-    width:90px;
-    height:90px;
-    background:rgba(0,0,0,0.5);
-    border-radius:50%;
-    box-shadow:0 0 15px rgba(0,255,200,0.6);
-    backdrop-filter:blur(5px);
-}
-
 /* RESPONSIVE */
 @media(max-width:768px){
-    .btn {
-        height:40%;
-        top:62%;
-    }
-    #clock {
-        width:70px;
-        height:70px;
+    .clock {
+        width:80px;
+        height:80px;
     }
 }
 </style>
-
 </head>
+
 <body>
 
 <h2>Pelayanan Digital Desa Muning Baru</h2>
@@ -133,19 +180,27 @@ h2 {
 <div class="wrapper">
 
     <img src="template-pelayanan.png">
-
     <div class="overlay"></div>
 
     <!-- JAM -->
-    <canvas id="clock"></canvas>
+    <div class="clock">
+        <div class="number n12"><span>12</span></div>
+        <div class="number n3"><span>3</span></div>
+        <div class="number n6"><span>6</span></div>
+        <div class="number n9"><span>9</span></div>
 
-    <!-- Buku Tamu -->
+        <div class="hand hour"></div>
+        <div class="hand minute"></div>
+        <div class="hand second"></div>
+
+        <div class="center"></div>
+    </div>
+
+    <!-- TOMBOL -->
     <div class="btn btn1" onclick="buka('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
 
-    <!-- Pelayanan Surat -->
     <div class="btn btn2" onclick="buka('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')"></div>
 
-    <!-- Aduan -->
     <div class="btn btn3" onclick="buka('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
 
 </div>
@@ -160,49 +215,30 @@ function buka(url){
     window.open(url, "_blank");
 }
 
-/* JAM ANALOG */
-const canvas = document.getElementById("clock");
-const ctx = canvas.getContext("2d");
-
-canvas.width = 90;
-canvas.height = 90;
-
-function drawClock(){
+/* JAM */
+function updateClock(){
     const now = new Date();
+
     const sec = now.getSeconds();
     const min = now.getMinutes();
     const hr = now.getHours();
 
-    ctx.clearRect(0,0,90,90);
+    const secDeg = sec * 6;
+    const minDeg = min * 6;
+    const hrDeg = (hr % 12) * 30 + min / 2;
 
-    // lingkaran
-    ctx.beginPath();
-    ctx.arc(45,45,40,0,Math.PI*2);
-    ctx.strokeStyle = "#00ffd5";
-    ctx.lineWidth = 3;
-    ctx.stroke();
+    document.querySelector('.second').style.transform =
+        `translateX(-50%) rotate(${secDeg}deg)`;
 
-    // jarum
-    drawHand((hr%12)*30 + min/2, 20, 4);
-    drawHand(min*6, 30, 3);
-    drawHand(sec*6, 35, 2, "red");
+    document.querySelector('.minute').style.transform =
+        `translateX(-50%) rotate(${minDeg}deg)`;
+
+    document.querySelector('.hour').style.transform =
+        `translateX(-50%) rotate(${hrDeg}deg)`;
 }
 
-function drawHand(angle, length, width, color="#00ffd5"){
-    const rad = angle*Math.PI/180;
-    ctx.beginPath();
-    ctx.moveTo(45,45);
-    ctx.lineTo(
-        45 + length*Math.cos(rad - Math.PI/2),
-        45 + length*Math.sin(rad - Math.PI/2)
-    );
-    ctx.strokeStyle = color;
-    ctx.lineWidth = width;
-    ctx.stroke();
-}
-
-setInterval(drawClock, 1000);
-drawClock();
+setInterval(updateClock,1000);
+updateClock();
 </script>
 
 </body>
