@@ -2,189 +2,174 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Desa Muning Baru</title>
+<title>Pelayanan Digital Desa Muning Baru</title>
 
 <style>
 body {
-    margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    background:#0b0b0b;
-    color:white;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  color: white;
+  text-align: center;
 }
 
-/* NAVBAR */
-.navbar {
-    display:flex;
-    justify-content:space-between;
-    padding:15px 30px;
-    background:#111;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-.navbar h2 {margin:0;}
-.navbar a {
-    color:white;
-    text-decoration:none;
-    margin-left:20px;
+/* HEADER */
+.header {
+  padding: 25px;
 }
 
-/* HERO */
-.hero img {
-    width:100%;
+.logo {
+  width: 110px;
 }
 
-/* MENU */
-.menu {
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:20px;
-    padding:30px;
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  color: gold;
 }
 
+.subtitle {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.clock {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* CONTAINER */
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  padding: 40px;
+  flex-wrap: wrap;
+}
+
+/* CARD */
 .card {
-    width:300px;
-    border-radius:20px;
-    overflow:hidden;
-    cursor:pointer;
-    transition:0.3s;
-    box-shadow:0 0 20px rgba(0,0,0,0.5);
-    background:#1a1a1a;
+  width: 280px;
+  height: 220px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
 }
 
+/* GLOW */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 25px;
+  background: linear-gradient(45deg, gold, orange, gold);
+  filter: blur(15px);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* HOVER */
 .card:hover {
-    transform:scale(1.05);
+  transform: scale(1.07);
 }
 
-.card img {
-    width:100%;
+/* ICON */
+.icon {
+  font-size: 50px;
+  margin-top: 35px;
 }
 
-.card h3 {
-    text-align:center;
-    padding:15px;
+/* TEXT */
+.card h2 {
+  margin: 10px 0 5px;
 }
 
-/* MODAL */
-.modal {
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.9);
-    z-index:2000;
+.card p {
+  font-size: 14px;
+  opacity: 0.7;
 }
 
-.modal-content {
-    width:90%;
-    height:90%;
-    margin:3% auto;
-    background:white;
-    border-radius:10px;
-    overflow:hidden;
-}
-
-.modal iframe {
-    width:100%;
-    height:100%;
-    border:none;
-}
-
-/* CLOSE */
-.close {
-    position:absolute;
-    top:20px;
-    right:30px;
-    font-size:30px;
-    cursor:pointer;
-    color:white;
-}
+/* WARNA */
+.tamu { background: linear-gradient(135deg, #065f46, #022c22); }
+.surat { background: linear-gradient(135deg, #1e3a8a, #0c1c4d); }
+.aduan { background: linear-gradient(135deg, #6b21a8, #2e1065); }
 
 /* FOOTER */
 .footer {
-    text-align:center;
-    padding:20px;
-    background:#111;
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 14px;
+  opacity: 0.7;
 }
 
-/* RESPONSIVE */
-@media(max-width:768px){
-    .menu {
-        flex-direction:column;
-        align-items:center;
-    }
+/* BUTTON CLICK EFFECT */
+.card:active {
+  transform: scale(0.95);
 }
 </style>
-
 </head>
+
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-    <h2>Desa Muning Baru</h2>
-    <div>
-        <a href="#">Home</a>
-        <a href="#layanan">Layanan</a>
-        <a href="#">Kontak</a>
-    </div>
+<div class="header">
+  <img src="https://website.desa.id/assets/files/data/website-desa-muning-baru-6306072001/images/bumdes/LGO_DESA_2022_1_.png" class="logo">
+  
+  <div class="title">PELAYANAN DIGITAL</div>
+  <div class="subtitle">PEMERINTAH DESA MUNING BARU</div>
+  
+  <div class="clock" id="clock"></div>
 </div>
 
-<!-- HERO -->
-<div class="hero">
-    <img src="template-pelayanan.png">
+<div class="container">
+
+<div class="card tamu" onclick="goLink('https://forms.gle/8ipvJkeh76VHPsAW8')">
+  <div class="icon">📖</div>
+  <h2>Buku Tamu</h2>
+  <p>Isi kehadiran sebelum pelayanan</p>
 </div>
 
-<!-- MENU -->
-<div id="layanan" class="menu">
+<div class="card surat" onclick="goLink('https://www.instagram.com/p/DXZDY5OEjw9/?igsh=MW0ybTZ1NW1mbTVjdQ==')">
+  <div class="icon">📄</div>
+  <h2>Pelayanan Surat</h2>
+  <p>Lihat persyaratan lengkap</p>
+</div>
 
-    <!-- Buku Tamu -->
-    <div class="card" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
-        <img src="template-pelayanan.png">
-        <h3>Buku Tamu</h3>
-    </div>
-
-    <!-- Pelayanan Surat (dibuka tab baru) -->
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform" target="_blank">
-        <div class="card">
-            <img src="template-pelayanan.png">
-            <h3>Pelayanan Surat</h3>
-        </div>
-    </a>
-
-    <!-- Aduan & Saran -->
-    <div class="card" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">
-        <img src="template-pelayanan.png">
-        <h3>Aduan & Saran</h3>
-    </div>
+<div class="card aduan" onclick="goLink('https://forms.gle/o864Q2Jdh42QEXRB7')">
+  <div class="icon">💬</div>
+  <h2>Aduan & Saran</h2>
+  <p>Sampaikan masukan Anda</p>
+</div>
 
 </div>
 
-<!-- MODAL -->
-<div id="modal" class="modal">
-    <span class="close" onclick="closeModal()">✖</span>
-    <div class="modal-content">
-        <iframe id="frame" loading="lazy"></iframe>
-    </div>
-</div>
-
-<!-- FOOTER -->
 <div class="footer">
-    © 2026 Desa Muning Baru - Melayani Sepenuh Hati
+  ✨ Melayani dengan Sepenuh Hati ✨
 </div>
+
+<audio id="clickSound">
+  <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3">
+</audio>
 
 <script>
-function openModal(link){
-    document.getElementById("modal").style.display="block";
-    document.getElementById("frame").src=link;
+function updateClock() {
+  const now = new Date();
+  document.getElementById("clock").innerHTML =
+    now.toLocaleDateString("id-ID") + " | " +
+    now.toLocaleTimeString("id-ID");
 }
+setInterval(updateClock, 1000);
+updateClock();
 
-function closeModal(){
-    document.getElementById("modal").style.display="none";
-    document.getElementById("frame").src="";
+function goLink(url) {
+  document.getElementById("clickSound").play();
+  setTimeout(() => {
+    window.location.href = url;
+  }, 150);
 }
 </script>
 
