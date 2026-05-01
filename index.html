@@ -66,79 +66,31 @@ h2 {
 }
 
 /* ========================= */
-/* JAM REALISTIS */
+/* JAM DIGITAL */
 /* ========================= */
 
-.clock {
+.clock-box {
     position:absolute;
     top:20px;
     right:20px;
-    width:120px;
-    height:120px;
-    border:6px solid black;
-    border-radius:50%;
-    background:white;
-    box-shadow:0 0 15px rgba(0,0,0,0.6);
-}
-
-/* angka */
-.number {
-    position:absolute;
-    width:100%;
-    height:100%;
+    background:rgba(0,0,0,0.6);
+    padding:10px 15px;
+    border-radius:15px;
+    box-shadow:0 0 15px rgba(0,255,200,0.6);
+    backdrop-filter:blur(5px);
     text-align:center;
+}
+
+.time {
+    font-size:24px;
     font-weight:bold;
-    font-size:14px;
+    color:#00ffd5;
 }
 
-.number span {
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-}
-
-.n12 span { top:5px; }
-.n3 span { right:5px; top:50%; transform:translateY(-50%); }
-.n6 span { bottom:5px; }
-.n9 span { left:5px; top:50%; transform:translateY(-50%); }
-
-/* jarum */
-.hand {
-    position:absolute;
-    bottom:50%;
-    left:50%;
-    transform-origin:bottom;
-    transform:translateX(-50%);
-}
-
-.hour {
-    width:4px;
-    height:30px;
-    background:black;
-}
-
-.minute {
-    width:3px;
-    height:40px;
-    background:black;
-}
-
-.second {
-    width:2px;
-    height:45px;
-    background:red;
-}
-
-/* titik tengah */
-.center {
-    position:absolute;
-    width:8px;
-    height:8px;
-    background:red;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
+.date {
+    font-size:12px;
+    margin-top:5px;
+    color:white;
 }
 
 /* RUNNING TEXT */
@@ -165,9 +117,9 @@ h2 {
 
 /* RESPONSIVE */
 @media(max-width:768px){
-    .clock {
-        width:80px;
-        height:80px;
+    .clock-box {
+        top:10px;
+        right:10px;
     }
 }
 </style>
@@ -182,18 +134,10 @@ h2 {
     <img src="template-pelayanan.png">
     <div class="overlay"></div>
 
-    <!-- JAM -->
-    <div class="clock">
-        <div class="number n12"><span>12</span></div>
-        <div class="number n3"><span>3</span></div>
-        <div class="number n6"><span>6</span></div>
-        <div class="number n9"><span>9</span></div>
-
-        <div class="hand hour"></div>
-        <div class="hand minute"></div>
-        <div class="hand second"></div>
-
-        <div class="center"></div>
+    <!-- JAM DIGITAL -->
+    <div class="clock-box">
+        <div class="time" id="jam"></div>
+        <div class="date" id="tanggal"></div>
     </div>
 
     <!-- TOMBOL -->
@@ -215,30 +159,25 @@ function buka(url){
     window.open(url, "_blank");
 }
 
-/* JAM */
-function updateClock(){
+/* JAM DIGITAL */
+function updateJam(){
     const now = new Date();
 
-    const sec = now.getSeconds();
-    const min = now.getMinutes();
-    const hr = now.getHours();
+    const hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+    const bulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
 
-    const secDeg = sec * 6;
-    const minDeg = min * 6;
-    const hrDeg = (hr % 12) * 30 + min / 2;
+    let h = String(now.getHours()).padStart(2,'0');
+    let m = String(now.getMinutes()).padStart(2,'0');
+    let s = String(now.getSeconds()).padStart(2,'0');
 
-    document.querySelector('.second').style.transform =
-        `translateX(-50%) rotate(${secDeg}deg)`;
+    document.getElementById("jam").innerHTML = `${h}:${m}:${s}`;
 
-    document.querySelector('.minute').style.transform =
-        `translateX(-50%) rotate(${minDeg}deg)`;
-
-    document.querySelector('.hour').style.transform =
-        `translateX(-50%) rotate(${hrDeg}deg)`;
+    document.getElementById("tanggal").innerHTML =
+        `${hari[now.getDay()]}, ${now.getDate()} ${bulan[now.getMonth()]} ${now.getFullYear()}`;
 }
 
-setInterval(updateClock,1000);
-updateClock();
+setInterval(updateJam,1000);
+updateJam();
 </script>
 
 </body>
