@@ -60,7 +60,7 @@ h2 {
     box-shadow:0 0 20px rgba(0,255,200,0.5);
 }
 
-/* JAM DIGITAL */
+/* JAM */
 .clock-box {
     position:absolute;
     top:20px;
@@ -69,7 +69,6 @@ h2 {
     padding:10px 15px;
     border-radius:15px;
     box-shadow:0 0 15px rgba(0,255,200,0.6);
-    backdrop-filter:blur(5px);
 }
 
 .time {
@@ -80,6 +79,7 @@ h2 {
 
 .date {
     font-size:12px;
+    color:white;
 }
 
 /* MENU TAMBAHAN */
@@ -126,6 +126,17 @@ h2 {
     to { transform:translateX(-100%); }
 }
 
+/* POPUP */
+#popup {
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.85);
+    z-index:9999;
+}
 </style>
 </head>
 
@@ -144,7 +155,7 @@ h2 {
         <div id="tanggal" class="date"></div>
     </div>
 
-    <!-- 3 MENU UTAMA -->
+    <!-- MENU UTAMA -->
     <div class="btn btn1" onclick="buka('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
 
     <div class="btn btn2" onclick="buka('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')"></div>
@@ -156,9 +167,7 @@ h2 {
 <!-- MENU TAMBAHAN -->
 <div class="extra-menu">
 
-    <div class="extra-btn" onclick="alert('Fitur Cek Status (bisa dihubungkan ke Google Sheet / sistem)')">
-        🔍 Cek Status Surat
-    </div>
+    <div class="extra-btn" onclick="bukaCek()">🔍 Cek Status Surat</div>
 
     <div class="extra-btn" onclick="buka('https://muningbaru1.blogspot.com/?m=1')">
         📄 Persyaratan Surat
@@ -169,6 +178,23 @@ h2 {
 <!-- RUNNING TEXT -->
 <div class="running-text">
 <p>✨ SELAMAT DATANG DI PELAYANAN KANTOR DESA MUNING BARU ✨</p>
+</div>
+
+<!-- POPUP CEK STATUS -->
+<div id="popup">
+<div style="background:white; color:black; padding:20px; width:300px; margin:100px auto; border-radius:15px; text-align:center;">
+
+<h3>🔍 Cek Status Surat</h3>
+
+<input id="cari" placeholder="Masukkan NIK / Nama"
+style="width:90%; padding:10px; border-radius:10px;"><br><br>
+
+<button onclick="cekData()">Cek</button>
+<button onclick="tutup()">Tutup</button>
+
+<p id="hasil" style="margin-top:15px; font-weight:bold;"></p>
+
+</div>
 </div>
 
 <script>
@@ -195,6 +221,49 @@ function updateJam(){
 
 setInterval(updateJam,1000);
 updateJam();
+
+/* POPUP */
+function bukaCek(){
+    document.getElementById("popup").style.display="block";
+}
+
+function tutup(){
+    document.getElementById("popup").style.display="none";
+}
+
+/* CEK STATUS REAL */
+async function cekData(){
+    const keyword = document.getElementById("cari").value.toLowerCase();
+
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv";
+
+    const response = await fetch(url);
+    const data = await response.text();
+
+    const rows = data.split("\n");
+
+    let ketemu = false;
+
+    for(let i=1;i<rows.length;i++){
+        const kolom = rows[i].split(",");
+
+        const nama = kolom[0]?.toLowerCase();
+        const nik = kolom[1]?.toLowerCase();
+        const status = kolom[3];
+
+        if(nama?.includes(keyword) || nik?.includes(keyword)){
+            document.getElementById("hasil").innerHTML =
+                "📄 Status: <b>"+status+"</b>";
+            ketemu = true;
+            break;
+        }
+    }
+
+    if(!ketemu){
+        document.getElementById("hasil").innerHTML =
+            "❌ Data tidak ditemukan";
+    }
+}
 </script>
 
 </body>
