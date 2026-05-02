@@ -231,9 +231,9 @@ function tutup(){
     document.getElementById("popup").style.display="none";
 }
 
-/* CEK STATUS REAL */
+/* CEK STATUS REAL (SUDAH SESUAI KOLOM NO) */
 async function cekData(){
-    const keyword = document.getElementById("cari").value.toLowerCase();
+    const keyword = document.getElementById("cari").value.toLowerCase().trim();
 
     const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv";
 
@@ -245,11 +245,11 @@ async function cekData(){
     let ketemu = false;
 
     for(let i=1;i<rows.length;i++){
-        const kolom = rows[i].split(",");
+        const kolom = rows[i].replace(/"/g,'').split(",");
 
-        const nama = kolom[0]?.toLowerCase();
-        const nik = kolom[1]?.toLowerCase();
-        const status = kolom[3];
+        const nama = kolom[1]?.toLowerCase().trim(); // B
+        const nik = kolom[2]?.toLowerCase().trim();  // C
+        const status = kolom[4];                     // E
 
         if(nama?.includes(keyword) || nik?.includes(keyword)){
             document.getElementById("hasil").innerHTML =
