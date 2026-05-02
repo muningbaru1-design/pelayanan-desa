@@ -13,37 +13,34 @@ body {
     text-align:center;
 }
 
-/* JUDUL */
 h2 {
     color:white;
     margin:20px;
 }
 
-/* CONTAINER */
+/* WRAPPER */
 .wrapper {
     position:relative;
     max-width:1000px;
     margin:auto;
 }
 
-/* GAMBAR */
 .wrapper img {
     width:100%;
     border-radius:20px;
 }
 
-/* OVERLAY */
 .overlay {
     position:absolute;
-    top:0;
-    left:0;
     width:100%;
     height:100%;
+    top:0;
+    left:0;
     background:linear-gradient(to top, rgba(0,0,0,0.25), transparent);
     border-radius:20px;
 }
 
-/* TOMBOL */
+/* TOMBOL GAMBAR */
 .btn {
     position:absolute;
     width:28%;
@@ -54,21 +51,16 @@ h2 {
     border-radius:20px;
 }
 
-/* POSISI */
 .btn1 { left:5%; }
 .btn2 { left:36%; }
 .btn3 { left:67%; }
 
-/* HOVER */
 .btn:hover {
     background:rgba(255,255,255,0.1);
     box-shadow:0 0 20px rgba(0,255,200,0.5);
 }
 
-/* ========================= */
 /* JAM DIGITAL */
-/* ========================= */
-
 .clock-box {
     position:absolute;
     top:20px;
@@ -78,36 +70,55 @@ h2 {
     border-radius:15px;
     box-shadow:0 0 15px rgba(0,255,200,0.6);
     backdrop-filter:blur(5px);
-    text-align:center;
 }
 
 .time {
-    font-size:24px;
-    font-weight:bold;
+    font-size:22px;
     color:#00ffd5;
+    font-weight:bold;
 }
 
 .date {
     font-size:12px;
-    margin-top:5px;
+}
+
+/* MENU TAMBAHAN */
+.extra-menu {
+    margin-top:25px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.extra-btn {
+    padding:15px 25px;
+    border-radius:15px;
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
     color:white;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.extra-btn:hover {
+    transform:scale(1.05);
+    box-shadow:0 0 15px rgba(0,255,200,0.6);
 }
 
 /* RUNNING TEXT */
 .running-text {
-    width:100%;
-    overflow:hidden;
-    background:linear-gradient(90deg,#00c6ff,#0072ff);
-    color:white;
-    padding:10px 0;
     margin-top:20px;
+    background:linear-gradient(90deg,#00c6ff,#0072ff);
+    padding:10px;
+    color:white;
+    overflow:hidden;
 }
 
 .running-text p {
     display:inline-block;
     white-space:nowrap;
     animation:jalan 12s linear infinite;
-    font-weight:bold;
 }
 
 @keyframes jalan {
@@ -115,13 +126,6 @@ h2 {
     to { transform:translateX(-100%); }
 }
 
-/* RESPONSIVE */
-@media(max-width:768px){
-    .clock-box {
-        top:10px;
-        right:10px;
-    }
-}
 </style>
 </head>
 
@@ -134,13 +138,13 @@ h2 {
     <img src="template-pelayanan.png">
     <div class="overlay"></div>
 
-    <!-- JAM DIGITAL -->
+    <!-- JAM -->
     <div class="clock-box">
-        <div class="time" id="jam"></div>
-        <div class="date" id="tanggal"></div>
+        <div id="jam" class="time"></div>
+        <div id="tanggal" class="date"></div>
     </div>
 
-    <!-- TOMBOL -->
+    <!-- 3 MENU UTAMA -->
     <div class="btn btn1" onclick="buka('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
 
     <div class="btn btn2" onclick="buka('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')"></div>
@@ -149,9 +153,22 @@ h2 {
 
 </div>
 
+<!-- MENU TAMBAHAN -->
+<div class="extra-menu">
+
+    <div class="extra-btn" onclick="alert('Fitur Cek Status (bisa dihubungkan ke Google Sheet / sistem)')">
+        🔍 Cek Status Surat
+    </div>
+
+    <div class="extra-btn" onclick="buka('https://muningbaru1.blogspot.com/?m=1')">
+        📄 Persyaratan Surat
+    </div>
+
+</div>
+
 <!-- RUNNING TEXT -->
 <div class="running-text">
-    <p>✨ SELAMAT DATANG DI PELAYANAN KANTOR DESA MUNING BARU ✨</p>
+<p>✨ SELAMAT DATANG DI PELAYANAN KANTOR DESA MUNING BARU ✨</p>
 </div>
 
 <script>
@@ -159,7 +176,7 @@ function buka(url){
     window.open(url, "_blank");
 }
 
-/* JAM DIGITAL */
+/* JAM */
 function updateJam(){
     const now = new Date();
 
