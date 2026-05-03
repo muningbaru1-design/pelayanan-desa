@@ -8,264 +8,201 @@
 <style>
 body {
     margin:0;
-    font-family:'Segoe UI', sans-serif;
-    background:#050505;
-    text-align:center;
+    font-family: 'Segoe UI', sans-serif;
+    background:#0b0b0b;
+    color:white;
+}
+
+/* NAVBAR */
+.navbar {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px;
+    background:#111;
 }
 
 /* LOGO */
-.logo-box {
-    margin:20px;
-}
-
 .logo-box img {
-    width:320px;
-    max-width:90%;
-    filter: brightness(1.3) contrast(1.2);
+    height:60px;
 }
 
-/* WRAPPER */
-.wrapper {
-    position:relative;
-    max-width:1000px;
-    margin:auto;
+/* JAM DIGITAL */
+.clock {
+    text-align:right;
+}
+.clock-time {
+    font-size:28px;
+    color:#00ffd5;
+    font-weight:bold;
+}
+.clock-date {
+    font-size:14px;
 }
 
-.wrapper img {
+/* HERO */
+.hero img {
     width:100%;
-    border-radius:20px;
 }
 
-.overlay {
-    position:absolute;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    background:linear-gradient(to top, rgba(0,0,0,0.25), transparent);
-    border-radius:20px;
+/* MENU */
+.menu {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    padding:30px;
 }
 
-/* TOMBOL GAMBAR */
-.btn {
-    position:absolute;
-    width:28%;
-    height:42%;
-    top:60%;
-    transform:translateY(-55%);
+.card {
+    width:300px;
+    border-radius:20px;
+    overflow:hidden;
     cursor:pointer;
-    border-radius:20px;
+    transition:0.3s;
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
 }
 
-.btn1 { left:5%; }
-.btn2 { left:36%; }
-.btn3 { left:67%; }
-
-.btn:hover {
-    background:rgba(255,255,255,0.1);
-    box-shadow:0 0 20px rgba(0,255,200,0.5);
+.card:hover {
+    transform:scale(1.05);
 }
 
-/* JAM */
-.clock-box {
-    position:absolute;
-    top:20px;
-    right:20px;
-    background:rgba(0,0,0,0.6);
-    padding:10px 15px;
-    border-radius:15px;
-    box-shadow:0 0 15px rgba(0,255,200,0.6);
+.card img {
+    width:100%;
 }
 
-.time {
-    font-size:22px;
+.card h3 {
+    text-align:center;
+    padding:15px;
+}
+
+/* TEXT BERJALAN */
+.marquee {
+    background:#111;
+    padding:10px;
+    text-align:center;
     color:#00ffd5;
     font-weight:bold;
 }
 
-.date {
-    font-size:12px;
-    color:white;
+/* FOOTER */
+.footer {
+    text-align:center;
+    padding:20px;
+    background:#111;
 }
 
-/* MENU TAMBAHAN */
-.extra-menu {
-    margin-top:25px;
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-}
-
-.extra-btn {
-    padding:15px 25px;
-    border-radius:15px;
-    background:linear-gradient(135deg,#00c6ff,#0072ff);
-    color:white;
-    cursor:pointer;
-    font-weight:bold;
-    transition:0.3s;
-}
-
-.extra-btn:hover {
-    transform:scale(1.05);
-    box-shadow:0 0 15px rgba(0,255,200,0.6);
-}
-
-/* RUNNING TEXT */
-.running-text {
-    margin-top:20px;
-    background:linear-gradient(90deg,#00c6ff,#0072ff);
-    padding:10px;
-    color:white;
-    overflow:hidden;
-}
-
-.running-text p {
-    display:inline-block;
-    white-space:nowrap;
-    animation:jalan 12s linear infinite;
-}
-
-@keyframes jalan {
-    from { transform:translateX(100%); }
-    to { transform:translateX(-100%); }
-}
-
-/* POPUP */
-#popup {
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.85);
-    z-index:9999;
+@media(max-width:768px){
+    .menu {
+        flex-direction:column;
+        align-items:center;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGO -->
-<div class="logo-box">
-    <img src="https://muningbaru1-design.github.io/pelayanan-desa/logo-simunbar.png">
-</div>
+<!-- NAVBAR -->
+<div class="navbar">
 
-<!-- GAMBAR UTAMA -->
-<div class="wrapper">
-
-    <img src="template-pelayanan.png">
-    <div class="overlay"></div>
-
-    <!-- JAM -->
-    <div class="clock-box">
-        <div id="jam" class="time"></div>
-        <div id="tanggal" class="date"></div>
+    <!-- LOGO -->
+    <div class="logo-box">
+        <img src="https://muningbaru1-design.github.io/pelayanan-desa/logo-simunbar.png">
     </div>
 
-    <!-- MENU UTAMA -->
-    <div class="btn btn1" onclick="buka('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
-
-    <div class="btn btn2" onclick="buka('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')"></div>
-
-    <div class="btn btn3" onclick="buka('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
+    <!-- JAM -->
+    <div class="clock">
+        <div class="clock-time" id="jam"></div>
+        <div class="clock-date" id="tanggal"></div>
+    </div>
 
 </div>
 
-<!-- MENU TAMBAHAN -->
-<div class="extra-menu">
-    <div class="extra-btn" onclick="bukaCek()">🔍 Cek Status Surat</div>
-    <div class="extra-btn" onclick="buka('https://muningbaru1.blogspot.com/?m=1')">📄 Persyaratan Surat</div>
+<!-- HERO -->
+<div class="hero">
+    <img src="template-pelayanan.png">
 </div>
 
-<!-- RUNNING TEXT -->
-<div class="running-text">
-<p>✨ SELAMAT DATANG DI PELAYANAN KANTOR DESA MUNING BARU ✨</p>
+<!-- TEXT BERJALAN -->
+<div class="marquee">
+    <marquee>SELAMAT DATANG DI PELAYANAN KANTOR DESA MUNING BARU</marquee>
 </div>
 
-<!-- BERITA DESA -->
-<div style="margin:40px;">
-    <button onclick="window.open('https://muningbaru1.blogspot.com/?m=1','_blank')" 
-    style="
-        padding:18px 30px;
-        font-size:16px;
-        border-radius:20px;
-        border:none;
-        cursor:pointer;
-        background:linear-gradient(135deg,#00c6ff,#0072ff);
-        color:white;
-        box-shadow:0 0 20px rgba(0,255,200,0.6);
-    ">
-        📰 Lihat Berita Desa
-    </button>
+<!-- MENU -->
+<div class="menu">
+
+    <!-- BUKU TAMU -->
+    <div class="card" onclick="window.open('https://forms.gle/8ipvJkeh76VHPsAW8','_blank')">
+        <img src="template-pelayanan.png">
+        <h3>Buku Tamu</h3>
+    </div>
+
+    <!-- PELAYANAN SURAT -->
+    <div class="card" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform','_blank')">
+        <img src="template-pelayanan.png">
+        <h3>Pelayanan Surat 🔴 <span id="notifSurat">0</span></h3>
+    </div>
+
+    <!-- ADUAN -->
+    <div class="card" onclick="window.open('https://forms.gle/o864Q2Jdh42QEXRB7','_blank')">
+        <img src="template-pelayanan.png">
+        <h3>Aduan & Saran 🔴 <span id="notifAduan">0</span></h3>
+    </div>
+
 </div>
 
-<!-- POPUP CEK STATUS -->
-<div id="popup">
-<div style="background:white; color:black; padding:20px; width:300px; margin:100px auto; border-radius:15px;">
-<h3>🔍 Cek Status Surat</h3>
-<input id="cari" placeholder="Masukkan NIK / Nama" style="width:90%; padding:10px;"><br><br>
-<button onclick="cekData()">Cek</button>
-<button onclick="tutup()">Tutup</button>
-<p id="hasil"></p>
-</div>
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 Desa Muning Baru - Melayani Sepenuh Hati
 </div>
 
 <script>
-function buka(url){ window.open(url,"_blank"); }
 
-/* JAM */
-function updateJam(){
-const now=new Date();
-const hari=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
-const bulan=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+/* JAM DIGITAL */
+function updateJam() {
+    const now = new Date();
 
-document.getElementById("jam").innerHTML=
-now.getHours().toString().padStart(2,'0')+":"+
-now.getMinutes().toString().padStart(2,'0')+":"+
-now.getSeconds().toString().padStart(2,'0');
+    let jam = now.toLocaleTimeString('id-ID');
+    let tanggal = now.toLocaleDateString('id-ID', {
+        weekday:'long',
+        day:'numeric',
+        month:'long',
+        year:'numeric'
+    });
 
-document.getElementById("tanggal").innerHTML=
-hari[now.getDay()]+", "+now.getDate()+" "+bulan[now.getMonth()]+" "+now.getFullYear();
+    document.getElementById("jam").innerText = jam;
+    document.getElementById("tanggal").innerText = tanggal;
 }
 setInterval(updateJam,1000);
 updateJam();
 
-/* POPUP */
-function bukaCek(){ document.getElementById("popup").style.display="block"; }
-function tutup(){ document.getElementById("popup").style.display="none"; }
+/* NOTIFIKASI DATA */
+async function ambilData() {
 
-/* CEK STATUS */
-async function cekData(){
-const keyword=document.getElementById("cari").value.toLowerCase().trim();
+  const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv";
 
-const url="https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv";
+  const res = await fetch(url);
+  const text = await res.text();
 
-const res=await fetch(url);
-const data=await res.text();
-const rows=data.split("\n");
+  const rows = text.split("\n");
 
-let ketemu=false;
+  let surat = 0;
+  let aduan = 0;
 
-for(let i=1;i<rows.length;i++){
-const kolom=rows[i].replace(/"/g,'').split(",");
-const nama=kolom[1]?.toLowerCase().trim();
-const nik=kolom[2]?.toLowerCase().trim();
-const status=kolom[4];
+  for (let i = 1; i < rows.length; i++) {
+    let data = rows[i].toLowerCase();
 
-if(nama?.includes(keyword)||nik?.includes(keyword)){
-document.getElementById("hasil").innerHTML="📄 Status: <b>"+status+"</b>";
-ketemu=true;
-break;
-}
+    if (data.includes("surat")) surat++;
+    if (data.includes("aduan") || data.includes("saran")) aduan++;
+  }
+
+  document.getElementById("notifSurat").innerText = surat;
+  document.getElementById("notifAduan").innerText = aduan;
 }
 
-if(!ketemu){
-document.getElementById("hasil").innerHTML="❌ Data tidak ditemukan";
-}
-}
+ambilData();
+
 </script>
 
 </body>
