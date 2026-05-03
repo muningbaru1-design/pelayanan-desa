@@ -33,15 +33,61 @@ body {
     font-size:14px;
 }
 
-/* HERO */
-.hero img {
-    width:100%;
+/* HERO WRAP */
+.hero-wrap {
+    position:relative;
     max-width:1200px;
-    display:block;
     margin:auto;
 }
+.hero-img {
+    width:100%;
+    display:block;
+}
 
-/* MENU */
+/* HOTSPOT */
+.hotspot {
+    position:absolute;
+    border-radius:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+/* GLOW EFFECT */
+.hotspot:hover {
+    box-shadow:0 0 25px #00ffd5;
+    background:rgba(0,255,213,0.15);
+}
+
+/* POSISI (SUDAH DISESUAIKAN UMUM) */
+.tamu {
+    top:55%;
+    left:5%;
+    width:25%;
+    height:25%;
+}
+.surat {
+    top:55%;
+    left:37%;
+    width:25%;
+    height:25%;
+}
+.aduan {
+    top:55%;
+    left:69%;
+    width:25%;
+    height:25%;
+}
+
+/* TEXT BERJALAN */
+.marquee {
+    background:#111;
+    padding:10px;
+    text-align:center;
+    color:#00ffd5;
+    font-weight:bold;
+}
+
+/* MENU BAWAH */
 .menu {
     display:flex;
     flex-wrap:wrap;
@@ -96,15 +142,7 @@ body {
     cursor:pointer;
 }
 
-/* TEXT BERJALAN */
-.marquee {
-    background:#111;
-    padding:10px;
-    text-align:center;
-    color:#00ffd5;
-    font-weight:bold;
-}
-
+/* FOOTER */
 .footer {
     text-align:center;
     padding:20px;
@@ -128,27 +166,19 @@ body {
 </div>
 
 <!-- HERO + HOTSPOT -->
-<div class="hero">
-    <img src="template-pelayanan.png" usemap="#menuMap">
+<div class="hero-wrap">
 
-    <map name="menuMap">
+    <img src="template-pelayanan.png" class="hero-img">
 
-        <!-- BUKU TAMU -->
-        <area shape="rect" coords="50,250,350,450"
-            href="javascript:void(0)"
-            onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
+    <div class="hotspot tamu"
+        onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
 
-        <!-- SURAT -->
-        <area shape="rect" coords="400,250,700,450"
-            href="javascript:void(0)"
-            onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')">
+    <div class="hotspot surat"
+        onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')"></div>
 
-        <!-- ADUAN -->
-        <area shape="rect" coords="750,250,1050,450"
-            href="javascript:void(0)"
-            onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">
+    <div class="hotspot aduan"
+        onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
 
-    </map>
 </div>
 
 <!-- TEXT BERJALAN -->
@@ -156,7 +186,7 @@ body {
     <marquee>SELAMAT DATANG DI PELAYANAN KANTOR DESA MUNING BARU</marquee>
 </div>
 
-<!-- MENU BAWAH (TETAP ADA) -->
+<!-- MENU BAWAH -->
 <div class="menu">
 
     <div class="card" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
