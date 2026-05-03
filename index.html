@@ -8,7 +8,7 @@
 <style>
 body {
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI',sans-serif;
     background:#0b0b0b;
     color:white;
 }
@@ -50,39 +50,33 @@ body {
     border-radius:20px;
     cursor:pointer;
     overflow:hidden;
-    transition:0.3s;
 }
 
-/* GLOW HIDUP */
+/* GLOW */
 .hotspot::before {
     content:"";
     position:absolute;
     inset:0;
     border-radius:20px;
     box-shadow:0 0 15px #00ffd5;
-    opacity:0.6;
     animation:pulseGlow 2s infinite;
 }
 
-/* GARIS BERGERAK */
+/* SCAN */
 .hotspot::after {
     content:"";
     position:absolute;
-    top:-100%;
-    left:-100%;
     width:200%;
     height:200%;
-    background:linear-gradient(120deg,
-        transparent,
-        rgba(0,255,213,0.3),
-        transparent);
+    top:-100%;
+    left:-100%;
+    background:linear-gradient(120deg,transparent,rgba(0,255,213,0.3),transparent);
     animation:scanMove 3s linear infinite;
 }
 
 /* HOVER */
 .hotspot:hover::before {
-    box-shadow:0 0 30px #00ffd5, 0 0 60px #00ffd5;
-    opacity:1;
+    box-shadow:0 0 35px #00ffd5,0 0 60px #00ffd5;
 }
 
 /* KLIK */
@@ -90,38 +84,38 @@ body {
     transform:scale(0.95);
 }
 
-/* POSISI */
+/* POSISI SUPER PRESISI */
 .tamu {
-    top:45%;     /* naik ke atas */
-    left:5%;
-    width:25%;
-    height:35%;  /* lebih tinggi */
+    top:50%;
+    left:5.5%;
+    width:26%;
+    height:34%;
 }
 
 .surat {
-    top:45%;
+    top:50%;
     left:37%;
-    width:25%;
-    height:35%;
+    width:26%;
+    height:34%;
 }
 
 .aduan {
-    top:45%;
-    left:69%;
-    width:25%;
-    height:35%;
+    top:50%;
+    left:68.5%;
+    width:26%;
+    height:34%;
 }
 
 /* ANIMASI */
 @keyframes pulseGlow {
     0% { box-shadow:0 0 10px #00ffd5; }
-    50% { box-shadow:0 0 25px #00ffd5; }
+    50% { box-shadow:0 0 30px #00ffd5; }
     100% { box-shadow:0 0 10px #00ffd5; }
 }
 
 @keyframes scanMove {
-    0% { transform:translate(-100%, -100%) rotate(25deg); }
-    100% { transform:translate(100%, 100%) rotate(25deg); }
+    0% { transform:translate(-100%,-100%) rotate(25deg); }
+    100% { transform:translate(100%,100%) rotate(25deg); }
 }
 
 /* TEXT BERJALAN */
@@ -133,7 +127,7 @@ body {
     font-weight:bold;
 }
 
-/* MENU */
+/* MENU BAWAH */
 .menu {
     display:flex;
     flex-wrap:wrap;
@@ -213,18 +207,11 @@ body {
 
 <!-- HERO -->
 <div class="hero-wrap">
-
     <img src="template-pelayanan.png" class="hero-img">
 
-    <div class="hotspot tamu"
-        onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
-
-    <div class="hotspot surat"
-        onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')"></div>
-
-    <div class="hotspot aduan"
-        onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
-
+    <div class="hotspot tamu" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
+    <div class="hotspot surat" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')"></div>
+    <div class="hotspot aduan" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
 </div>
 
 <!-- TEXT -->
@@ -234,7 +221,6 @@ body {
 
 <!-- MENU -->
 <div class="menu">
-
     <div class="card" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
         <img src="template-pelayanan.png">
         <h3>Buku Tamu 🔵 <span id="notifTamu">0</span></h3>
@@ -249,7 +235,6 @@ body {
         <img src="template-pelayanan.png">
         <h3>Aduan & Saran 🔴 <span id="notifAduan">0</span></h3>
     </div>
-
 </div>
 
 <!-- MODAL -->
@@ -259,13 +244,9 @@ body {
 </div>
 
 <!-- FOOTER -->
-<div class="footer">
-© 2026 Desa Muning Baru
-</div>
+<div class="footer">© 2026 Desa Muning Baru</div>
 
 <script>
-
-/* JAM */
 function updateJam(){
     const now=new Date();
     document.getElementById("jam").innerText=now.toLocaleTimeString('id-ID');
@@ -276,7 +257,6 @@ function updateJam(){
 }
 setInterval(updateJam,1000);
 
-/* MODAL */
 function openModal(link){
     document.getElementById("modal").style.display="block";
     document.getElementById("frame").src=link;
@@ -286,9 +266,7 @@ function closeModal(){
     document.getElementById("frame").src="";
 }
 
-/* DATA */
 async function ambilData(){
-
 const [tamu,surat,aduan]=await Promise.all([
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTf0YY597JgnBlEeoq375PxbGMzpq0Eum3qF57iU-HvAG0GviT8x7Feh6pvwm16bVfbtGRVWiHTtln5/pub?gid=53317010&single=true&output=csv").then(r=>r.text()),
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv").then(r=>r.text()),
@@ -298,11 +276,9 @@ fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vR_5xLKXz0SzzQgs-CTw7M3A5
 document.getElementById("notifTamu").innerText=tamu.split("\n").length-1;
 document.getElementById("notifSurat").innerText=surat.split("\n").length-1;
 document.getElementById("notifAduan").innerText=aduan.split("\n").length-1;
-
 }
 
 ambilData();
-
 </script>
 
 </body>
