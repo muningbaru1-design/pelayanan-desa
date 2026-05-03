@@ -37,10 +37,7 @@ body{
     display:block;
 }
 
-/* ========================= */
-/* HOTSPOT SUPER PRESISI */
-/* ========================= */
-
+/* HOTSPOT */
 .icon-area{
     position:absolute;
     cursor:pointer;
@@ -48,29 +45,10 @@ body{
     transform:translate(-50%, -50%);
 }
 
-/* BUKU TAMU */
-.tamu{
-    top:64%;
-    left:21%;
-    width:22%;
-    height:26%;
-}
-
-/* SURAT */
-.surat{
-    top:64%;
-    left:50%;
-    width:22%;
-    height:26%;
-}
-
-/* ADUAN */
-.aduan{
-    top:64%;
-    left:79%;
-    width:22%;
-    height:26%;
-}
+/* POSISI */
+.tamu{ top:64%; left:21%; width:22%; height:26%; }
+.surat{ top:64%; left:50%; width:22%; height:26%; }
+.aduan{ top:64%; left:79%; width:22%; height:26%; }
 
 /* GLOW HALUS */
 .icon-area::before{
@@ -78,41 +56,45 @@ body{
     position:absolute;
     inset:0;
     border-radius:28px;
-
     background:rgba(0,255,213,0.10);
-
     box-shadow:
         0 0 12px rgba(0,255,213,0.35),
         0 0 22px rgba(0,255,213,0.15);
-
     opacity:0.6;
     transition:0.3s;
 }
-
-/* HOVER */
 .icon-area:hover::before{
     box-shadow:
         0 0 20px rgba(0,255,213,0.6),
         0 0 35px rgba(0,255,213,0.25);
     opacity:1;
 }
-
-/* KLIK */
 .icon-area:active{
     transform:translate(-50%, -50%) scale(0.97);
 }
 
-/* RESPONSIVE */
-@media (max-width:768px){
-
-    .icon-area{
-        border-radius:20px;
-    }
-
-    .tamu{ top:66%; left:20%; width:26%; height:28%; }
-    .surat{ top:66%; left:50%; width:26%; height:28%; }
-    .aduan{ top:66%; left:80%; width:26%; height:28%; }
-
+/* CEK STATUS */
+.cek-status{
+    text-align:center;
+    padding:20px;
+}
+.cek-status input{
+    padding:10px;
+    width:260px;
+    border-radius:8px;
+    border:none;
+}
+.cek-status button{
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    background:#00ffd5;
+    cursor:pointer;
+    font-weight:bold;
+}
+#hasilStatus{
+    margin-top:10px;
+    font-weight:bold;
 }
 
 /* MARQUEE */
@@ -121,7 +103,6 @@ body{
     padding:10px;
     text-align:center;
     color:#00ffd5;
-    font-weight:bold;
 }
 
 /* MENU */
@@ -138,7 +119,6 @@ body{
     overflow:hidden;
     cursor:pointer;
     transition:0.3s;
-    box-shadow:0 0 20px rgba(0,0,0,0.5);
 }
 .card:hover{transform:scale(1.05)}
 .card img{width:100%}
@@ -153,26 +133,21 @@ body{
     width:100%;
     height:100%;
     background:rgba(0,0,0,0.9);
-    z-index:2000;
 }
 .modal iframe{
     width:90%;
     height:90%;
     margin:3% auto;
     display:block;
-    border:none;
-    background:white;
-    border-radius:10px;
 }
 .close{
     position:absolute;
-    top:20px;
-    right:30px;
+    right:20px;
+    top:10px;
     font-size:30px;
     cursor:pointer;
 }
 
-/* FOOTER */
 .footer{
     text-align:center;
     padding:20px;
@@ -183,95 +158,79 @@ body{
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
-    <div class="logo-box">
-        <img src="https://muningbaru1-design.github.io/pelayanan-desa/logo-simunbar.png">
-    </div>
-
-    <div>
-        <div class="clock-time" id="jam"></div>
-        <div class="clock-date" id="tanggal"></div>
-    </div>
+<div class="logo-box">
+<img src="https://muningbaru1-design.github.io/pelayanan-desa/logo-simunbar.png">
+</div>
+<div>
+<div class="clock-time" id="jam"></div>
+<div class="clock-date" id="tanggal"></div>
+</div>
 </div>
 
-<!-- HERO -->
 <div class="hero-wrap">
-    <img src="template-pelayanan.png" class="hero-img">
+<img src="template-pelayanan.png" class="hero-img">
 
-    <div class="icon-area tamu"
-        onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
-
-    <div class="icon-area surat"
-        onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')"></div>
-
-    <div class="icon-area aduan"
-        onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
+<div class="icon-area tamu" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
+<div class="icon-area surat" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')"></div>
+<div class="icon-area aduan" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
 </div>
 
-<!-- TEXT -->
+<!-- CEK STATUS -->
+<div class="cek-status">
+<input type="text" id="cari" placeholder="Masukkan Nama / NIK">
+<button onclick="cekStatus()">Cek Status Surat</button>
+<div id="hasilStatus"></div>
+</div>
+
 <div class="marquee">
-<marquee>SELAMAT DATANG DI PELAYANAN KANTOR DESA MUNING BARU</marquee>
+<marquee>SELAMAT DATANG DI PELAYANAN DESA MUNING BARU</marquee>
 </div>
 
-<!-- MENU -->
 <div class="menu">
-
-    <div class="card" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
-        <img src="template-pelayanan.png">
-        <h3>Buku Tamu 🔵 <span id="notifTamu">0</span></h3>
-    </div>
-
-    <div class="card" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')">
-        <img src="template-pelayanan.png">
-        <h3>Pelayanan Surat 🔴 <span id="notifSurat">0</span></h3>
-    </div>
-
-    <div class="card" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">
-        <img src="template-pelayanan.png">
-        <h3>Aduan & Saran 🔴 <span id="notifAduan">0</span></h3>
-    </div>
-
+<div class="card" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
+<img src="template-pelayanan.png">
+<h3>Buku Tamu 🔵 <span id="notifTamu">0</span></h3>
 </div>
 
-<!-- MODAL -->
+<div class="card" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')">
+<img src="template-pelayanan.png">
+<h3>Pelayanan Surat 🔴 <span id="notifSurat">0</span></h3>
+</div>
+
+<div class="card" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">
+<img src="template-pelayanan.png">
+<h3>Aduan 🔴 <span id="notifAduan">0</span></h3>
+</div>
+</div>
+
 <div id="modal" class="modal">
-    <span class="close" onclick="closeModal()">✖</span>
-    <iframe id="frame"></iframe>
+<span class="close" onclick="closeModal()">✖</span>
+<iframe id="frame"></iframe>
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-© 2026 Desa Muning Baru
-</div>
+<div class="footer">© 2026 Desa Muning Baru</div>
 
 <script>
-
-/* JAM */
 function updateJam(){
-    const now=new Date();
-    document.getElementById("jam").innerText=now.toLocaleTimeString('id-ID');
-    document.getElementById("tanggal").innerText=
-    now.toLocaleDateString('id-ID',{
-        weekday:'long',day:'numeric',month:'long',year:'numeric'
-    });
+const now=new Date();
+document.getElementById("jam").innerText=now.toLocaleTimeString('id-ID');
+document.getElementById("tanggal").innerText=
+now.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 }
-updateJam();
 setInterval(updateJam,1000);
 
 /* MODAL */
 function openModal(link){
-    document.getElementById("modal").style.display="block";
-    document.getElementById("frame").src=link;
+document.getElementById("modal").style.display="block";
+document.getElementById("frame").src=link;
 }
 function closeModal(){
-    document.getElementById("modal").style.display="none";
-    document.getElementById("frame").src="";
+document.getElementById("modal").style.display="none";
 }
 
-/* NOTIFIKASI */
+/* NOTIF */
 async function ambilData(){
-try{
 const [tamu,surat,aduan]=await Promise.all([
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTf0YY597JgnBlEeoq375PxbGMzpq0Eum3qF57iU-HvAG0GviT8x7Feh6pvwm16bVfbtGRVWiHTtln5/pub?gid=53317010&single=true&output=csv").then(r=>r.text()),
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv").then(r=>r.text()),
@@ -281,13 +240,25 @@ fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vR_5xLKXz0SzzQgs-CTw7M3A5
 document.getElementById("notifTamu").innerText=tamu.split("\n").length-1;
 document.getElementById("notifSurat").innerText=surat.split("\n").length-1;
 document.getElementById("notifAduan").innerText=aduan.split("\n").length-1;
-
-}catch(e){
-console.log("Gagal ambil data",e);
-}
 }
 ambilData();
 
+/* CEK STATUS */
+async function cekStatus(){
+const keyword=document.getElementById("cari").value.toLowerCase();
+const data=await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv").then(r=>r.text());
+
+const rows=data.split("\n");
+let hasil="Data tidak ditemukan";
+
+for(let i=1;i<rows.length;i++){
+if(rows[i].toLowerCase().includes(keyword)){
+hasil="Status: "+rows[i];
+break;
+}
+}
+document.getElementById("hasilStatus").innerText=hasil;
+}
 </script>
 
 </body>
