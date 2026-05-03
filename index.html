@@ -27,12 +27,12 @@ body {
     height:60px;
 }
 
-/* JAM DIGITAL */
+/* JAM */
 .clock {
     text-align:right;
 }
 .clock-time {
-    font-size:28px;
+    font-size:26px;
     color:#00ffd5;
     font-weight:bold;
 }
@@ -135,7 +135,7 @@ body {
     <!-- BUKU TAMU -->
     <div class="card" onclick="window.open('https://forms.gle/8ipvJkeh76VHPsAW8','_blank')">
         <img src="template-pelayanan.png">
-        <h3>Buku Tamu</h3>
+        <h3>Buku Tamu 🔵 <span id="notifTamu">0</span></h3>
     </div>
 
     <!-- PELAYANAN SURAT -->
@@ -159,25 +159,27 @@ body {
 
 <script>
 
-/* JAM DIGITAL */
+/* JAM */
 function updateJam() {
     const now = new Date();
 
-    let jam = now.toLocaleTimeString('id-ID');
-    let tanggal = now.toLocaleDateString('id-ID', {
-        weekday:'long',
-        day:'numeric',
-        month:'long',
-        year:'numeric'
-    });
+    document.getElementById("jam").innerText =
+        now.getHours().toString().padStart(2,'0') + ":" +
+        now.getMinutes().toString().padStart(2,'0') + ":" +
+        now.getSeconds().toString().padStart(2,'0');
 
-    document.getElementById("jam").innerText = jam;
-    document.getElementById("tanggal").innerText = tanggal;
+    document.getElementById("tanggal").innerText =
+        now.toLocaleDateString('id-ID', {
+            weekday:'long',
+            day:'numeric',
+            month:'long',
+            year:'numeric'
+        });
 }
 setInterval(updateJam,1000);
 updateJam();
 
-/* NOTIFIKASI DATA */
+/* NOTIFIKASI */
 async function ambilData() {
 
   const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv";
@@ -187,6 +189,7 @@ async function ambilData() {
 
   const rows = text.split("\n");
 
+  let tamu = rows.length - 1;
   let surat = 0;
   let aduan = 0;
 
@@ -197,6 +200,7 @@ async function ambilData() {
     if (data.includes("aduan") || data.includes("saran")) aduan++;
   }
 
+  document.getElementById("notifTamu").innerText = tamu;
   document.getElementById("notifSurat").innerText = surat;
   document.getElementById("notifAduan").innerText = aduan;
 }
