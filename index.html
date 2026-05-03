@@ -50,7 +50,7 @@ body{
 .surat{ top:64%; left:50%; width:22%; height:26%; }
 .aduan{ top:64%; left:79%; width:22%; height:26%; }
 
-/* GLOW HALUS */
+/* GLOW */
 .icon-area::before{
     content:"";
     position:absolute;
@@ -166,7 +166,6 @@ body{
 <div class="clock-time" id="jam"></div>
 <div class="clock-date" id="tanggal"></div>
 
-<!-- ADMIN BUTTON -->
 <button onclick="openAdmin()" style="
 margin-top:5px;
 padding:5px 10px;
@@ -200,6 +199,7 @@ Admin
 </div>
 
 <div class="menu">
+
 <div class="card" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
 <img src="template-pelayanan.png">
 <h3>Buku Tamu 🔵 <span id="notifTamu">0</span></h3>
@@ -214,6 +214,13 @@ Admin
 <img src="template-pelayanan.png">
 <h3>Aduan 🔴 <span id="notifAduan">0</span></h3>
 </div>
+
+<!-- 📰 BERITA DESA -->
+<div class="card" onclick="openBerita()">
+<img src="template-pelayanan.png">
+<h3>Berita Desa 🟢</h3>
+</div>
+
 </div>
 
 <div id="modal" class="modal">
@@ -221,53 +228,19 @@ Admin
 <iframe id="frame"></iframe>
 </div>
 
-<!-- ADMIN PANEL -->
-<div id="adminPanel" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.85);
-z-index:9999;">
-
-<div style="
-background:#111;
-width:300px;
-padding:20px;
-border-radius:12px;
-text-align:center;
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);">
-
+<!-- ADMIN PANEL (tetap sama) -->
+<div id="adminPanel" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;">
+<div style="background:#111;width:300px;padding:20px;border-radius:12px;text-align:center;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
 <h3>Login Admin</h3>
-
-<input type="password" id="adminPin" placeholder="Masukkan PIN"
-style="width:100%;padding:10px;border-radius:8px;border:none;">
-
-<button onclick="cekLogin()" style="
-margin-top:10px;
-width:100%;
-padding:10px;
-border:none;
-border-radius:8px;
-background:#00ffd5;
-font-weight:bold;">
-Masuk
-</button>
-
+<input type="password" id="adminPin" placeholder="Masukkan PIN" style="width:100%;padding:10px;border-radius:8px;border:none;">
+<button onclick="cekLogin()" style="margin-top:10px;width:100%;padding:10px;border:none;border-radius:8px;background:#00ffd5;font-weight:bold;">Masuk</button>
 <div id="menuAdmin" style="display:none;margin-top:10px;">
 <button onclick="goAdmin(1)" style="width:100%;margin-top:5px;">Buku Tamu</button>
 <button onclick="goAdmin(2)" style="width:100%;margin-top:5px;">Surat</button>
 <button onclick="goAdmin(3)" style="width:100%;margin-top:5px;">Aduan</button>
 <button onclick="goAdmin(4)" style="width:100%;margin-top:5px;">Semua Data</button>
 </div>
-
 <div onclick="closeAdmin()" style="margin-top:10px;cursor:pointer;">Tutup</div>
-
 </div>
 </div>
 
@@ -289,6 +262,11 @@ document.getElementById("frame").src=link;
 }
 function closeModal(){
 document.getElementById("modal").style.display="none";
+}
+
+/* BERITA */
+function openBerita(){
+window.open("http://muningbaru1.blogspot.com/?m=1","_blank");
 }
 
 /* NOTIF */
@@ -333,31 +311,10 @@ alert("PIN salah!");
 }
 }
 function goAdmin(x){
-
-// 📋 Buku Tamu
-if(x==1) window.open(
-"https://docs.google.com/spreadsheets/d/1wXSSNQZdIGYdBOCNST6ec9P7QkmGC0XlsKqNHWF4zkA/edit",
-"_blank"
-);
-
-// 📄 Pelayanan Surat
-if(x==2) window.open(
-"https://docs.google.com/spreadsheets/d/1GimNzY0IiloawXkKdhJsxmI4Z_LpoFJCgYj0icam5TU/edit",
-"_blank"
-);
-
-// 🚨 Aduan & Saran
-if(x==3) window.open(
-"https://docs.google.com/spreadsheets/d/1CSXWRzMxMTvWwyNid3pod8KEgSYJiwhi2BS_bPvY6nc/edit",
-"_blank"
-);
-
-// 🗂 Semua Data (Drive)
-if(x==4) window.open(
-"https://drive.google.com/drive/my-drive",
-"_blank"
-);
-
+if(x==1) window.open("https://docs.google.com/spreadsheets/d/1wXSSNQZdIGYdBOCNST6ec9P7QkmGC0XlsKqNHWF4zkA/edit","_blank");
+if(x==2) window.open("https://docs.google.com/spreadsheets/d/1GimNzY0IiloawXkKdhJsxmI4Z_LpoFJCgYj0icam5TU/edit","_blank");
+if(x==3) window.open("https://docs.google.com/spreadsheets/d/1CSXWRzMxMTvWwyNid3pod8KEgSYJiwhi2BS_bPvY6nc/edit","_blank");
+if(x==4) window.open("https://drive.google.com/drive/my-drive","_blank");
 }
 </script>
 
