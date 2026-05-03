@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SiMUNBAR</title>
+<title>SiMUNBAR - Pelayanan Desa</title>
 
 <style>
 body{
@@ -38,100 +38,57 @@ body{
 }
 
 /* ========================= */
-/* HOTSPOT ICON SHAPE GLOW   */
+/* HOTSPOT HALUS (NO GANGGU) */
 /* ========================= */
 
 .icon-area{
     position:absolute;
     cursor:pointer;
+    border-radius:20px;
 }
 
-/* POSISI */
-.tamu{ top:50%; left:6%; width:26%; height:34%; }
+/* POSISI PRESISI */
+.tamu{ top:50%; left:5.5%; width:26%; height:34%; }
 .surat{ top:50%; left:37%; width:26%; height:34%; }
-.aduan{ top:50%; left:68%; width:26%; height:34%; }
+.aduan{ top:50%; left:68.5%; width:26%; height:34%; }
 
-/* GLOW IKON (PAKAI MASK) */
+/* GLOW HALUS */
 .icon-area::before{
     content:"";
     position:absolute;
     inset:0;
+    border-radius:20px;
 
-    /* INI KUNCI UTAMA */
-    -webkit-mask: radial-gradient(circle at center, white 40%, transparent 70%);
-    mask: radial-gradient(circle at center, white 40%, transparent 70%);
+    background:rgba(0,255,213,0.12);
 
-    background:linear-gradient(
-        to top,
-        rgba(0,255,213,0.5),
-        rgba(0,255,213,0.2),
-        transparent
-    );
+    box-shadow:
+        0 0 10px rgba(0,255,213,0.35),
+        0 0 20px rgba(0,255,213,0.15);
 
-    filter:blur(20px);
-    animation:glowPulse 2.5s infinite;
+    opacity:0.7;
+    transition:0.3s;
 }
-
-/* SCAN BERGERAK */
-.icon-area::after{
-    content:"";
-    position:absolute;
-    width:200%;
-    height:200%;
-    top:-100%;
-    left:-100%;
-
-    background:linear-gradient(
-        120deg,
-        transparent,
-        rgba(0,255,213,0.4),
-        transparent
-    );
-}
-
-/* ARAH BERBEDA */
-.tamu::after{ animation:scanLeft 3s linear infinite; }
-.surat::after{ animation:scanCenter 3s linear infinite; }
-.aduan::after{ animation:scanRight 3s linear infinite; }
 
 /* HOVER */
 .icon-area:hover::before{
-    filter:blur(25px);
+    box-shadow:
+        0 0 18px rgba(0,255,213,0.6),
+        0 0 30px rgba(0,255,213,0.25);
+    opacity:1;
 }
 
 /* KLIK */
 .icon-area:active{
-    transform:scale(0.95);
+    transform:scale(0.96);
 }
 
-/* ANIMASI */
-@keyframes glowPulse{
-    0%{opacity:0.5}
-    50%{opacity:1}
-    100%{opacity:0.5}
-}
-
-@keyframes scanCenter{
-    0%{transform:translate(-100%,-100%) rotate(25deg)}
-    100%{transform:translate(100%,100%) rotate(25deg)}
-}
-
-@keyframes scanLeft{
-    0%{transform:translate(-100%,-100%) rotate(-25deg)}
-    100%{transform:translate(100%,100%) rotate(-25deg)}
-}
-
-@keyframes scanRight{
-    0%{transform:translate(-100%,-100%) rotate(45deg)}
-    100%{transform:translate(100%,100%) rotate(45deg)}
-}
-
-/* TEXT */
+/* TEXT BERJALAN */
 .marquee{
     background:#111;
     padding:10px;
     text-align:center;
     color:#00ffd5;
+    font-weight:bold;
 }
 
 /* MENU */
@@ -148,6 +105,7 @@ body{
     overflow:hidden;
     cursor:pointer;
     transition:0.3s;
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
 }
 .card:hover{transform:scale(1.05)}
 .card img{width:100%}
@@ -162,87 +120,135 @@ body{
     width:100%;
     height:100%;
     background:rgba(0,0,0,0.9);
+    z-index:2000;
 }
 .modal iframe{
     width:90%;
     height:90%;
     margin:3% auto;
     display:block;
+    border:none;
+    background:white;
+    border-radius:10px;
 }
 .close{
     position:absolute;
-    right:20px;
-    top:10px;
+    top:20px;
+    right:30px;
     font-size:30px;
     cursor:pointer;
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    padding:20px;
+    background:#111;
 }
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
-<div class="logo-box">
-<img src="https://muningbaru1-design.github.io/pelayanan-desa/logo-simunbar.png">
-</div>
+    <div class="logo-box">
+        <img src="https://muningbaru1-design.github.io/pelayanan-desa/logo-simunbar.png">
+    </div>
 
-<div>
-<div class="clock-time" id="jam"></div>
-<div class="clock-date" id="tanggal"></div>
-</div>
+    <div>
+        <div class="clock-time" id="jam"></div>
+        <div class="clock-date" id="tanggal"></div>
+    </div>
 </div>
 
 <!-- HERO -->
 <div class="hero-wrap">
-<img src="template-pelayanan.png" class="hero-img">
+    <img src="template-pelayanan.png" class="hero-img">
 
-<div class="icon-area tamu" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
-<div class="icon-area surat" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')"></div>
-<div class="icon-area aduan" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
+    <div class="icon-area tamu"
+        onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
+
+    <div class="icon-area surat"
+        onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')"></div>
+
+    <div class="icon-area aduan"
+        onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
 </div>
 
+<!-- TEXT -->
 <div class="marquee">
-<marquee>SELAMAT DATANG DI PELAYANAN DESA MUNING BARU</marquee>
+<marquee>SELAMAT DATANG DI PELAYANAN KANTOR DESA MUNING BARU</marquee>
 </div>
 
+<!-- MENU BAWAH -->
 <div class="menu">
-<div class="card" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
-<img src="template-pelayanan.png">
-<h3>Buku Tamu 🔵</h3>
+
+    <div class="card" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
+        <img src="template-pelayanan.png">
+        <h3>Buku Tamu 🔵 <span id="notifTamu">0</span></h3>
+    </div>
+
+    <div class="card" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')">
+        <img src="template-pelayanan.png">
+        <h3>Pelayanan Surat 🔴 <span id="notifSurat">0</span></h3>
+    </div>
+
+    <div class="card" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">
+        <img src="template-pelayanan.png">
+        <h3>Aduan & Saran 🔴 <span id="notifAduan">0</span></h3>
+    </div>
+
 </div>
 
-<div class="card" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')">
-<img src="template-pelayanan.png">
-<h3>Pelayanan Surat 🔴</h3>
-</div>
-
-<div class="card" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">
-<img src="template-pelayanan.png">
-<h3>Aduan & Saran 🔴</h3>
-</div>
-</div>
-
+<!-- MODAL -->
 <div id="modal" class="modal">
-<span class="close" onclick="closeModal()">✖</span>
-<iframe id="frame"></iframe>
+    <span class="close" onclick="closeModal()">✖</span>
+    <iframe id="frame"></iframe>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+© 2026 Desa Muning Baru
 </div>
 
 <script>
+
+/* JAM */
 function updateJam(){
-const now=new Date();
-document.getElementById("jam").innerText=now.toLocaleTimeString('id-ID');
-document.getElementById("tanggal").innerText=
-now.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    const now=new Date();
+    document.getElementById("jam").innerText=now.toLocaleTimeString('id-ID');
+    document.getElementById("tanggal").innerText=
+    now.toLocaleDateString('id-ID',{
+        weekday:'long',day:'numeric',month:'long',year:'numeric'
+    });
 }
 setInterval(updateJam,1000);
 
+/* MODAL */
 function openModal(link){
-document.getElementById("modal").style.display="block";
-document.getElementById("frame").src=link;
+    document.getElementById("modal").style.display="block";
+    document.getElementById("frame").src=link;
 }
 function closeModal(){
-document.getElementById("modal").style.display="none";
+    document.getElementById("modal").style.display="none";
+    document.getElementById("frame").src="";
 }
+
+/* NOTIFIKASI */
+async function ambilData(){
+const [tamu,surat,aduan]=await Promise.all([
+fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTf0YY597JgnBlEeoq375PxbGMzpq0Eum3qF57iU-HvAG0GviT8x7Feh6pvwm16bVfbtGRVWiHTtln5/pub?gid=53317010&single=true&output=csv").then(r=>r.text()),
+fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv").then(r=>r.text()),
+fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vR_5xLKXz0SzzQgs-CTw7M3A5hiVZ2UyttODKK-vPFVvHup81fE_wLus-FWCXygXVxJ2te9Ni5FqSoD/pub?gid=1837680240&single=true&output=csv").then(r=>r.text())
+]);
+
+document.getElementById("notifTamu").innerText=tamu.split("\n").length-1;
+document.getElementById("notifSurat").innerText=surat.split("\n").length-1;
+document.getElementById("notifAduan").innerText=aduan.split("\n").length-1;
+}
+ambilData();
+
 </script>
 
 </body>
