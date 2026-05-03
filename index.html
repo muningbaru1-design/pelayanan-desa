@@ -17,24 +17,17 @@ body {
 .navbar {
     display:flex;
     justify-content:space-between;
-    align-items:center;
     padding:15px 30px;
     background:#111;
 }
-
-/* LOGO */
 .logo-box img {
     height:60px;
 }
 
 /* JAM */
-.clock {
-    text-align:right;
-}
 .clock-time {
     font-size:26px;
     color:#00ffd5;
-    font-weight:bold;
 }
 .clock-date {
     font-size:14px;
@@ -62,37 +55,18 @@ body {
     transition:0.3s;
     box-shadow:0 0 20px rgba(0,0,0,0.5);
 }
-
 .card:hover {
     transform:scale(1.05);
 }
-
 .card img {
     width:100%;
 }
-
 .card h3 {
     text-align:center;
     padding:15px;
 }
 
-/* TOMBOL SCREEN */
-.screen-btn {
-    display:block;
-    margin:10px auto 15px;
-    padding:8px 15px;
-    background:#00ffd5;
-    color:black;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-}
-.screen-btn:hover {
-    background:#00c2a5;
-}
-
-/* MODAL */
+/* MODAL (INI YANG DIPERTAHANKAN) */
 .modal {
     display:none;
     position:fixed;
@@ -101,7 +75,7 @@ body {
     width:100%;
     height:100%;
     background:rgba(0,0,0,0.9);
-    z-index:9999;
+    z-index:2000;
 }
 .modal iframe {
     width:90%;
@@ -117,7 +91,6 @@ body {
     top:20px;
     right:30px;
     font-size:30px;
-    color:white;
     cursor:pointer;
 }
 
@@ -130,18 +103,10 @@ body {
     font-weight:bold;
 }
 
-/* FOOTER */
 .footer {
     text-align:center;
     padding:20px;
     background:#111;
-}
-
-@media(max-width:768px){
-    .menu {
-        flex-direction:column;
-        align-items:center;
-    }
 }
 </style>
 </head>
@@ -154,7 +119,7 @@ body {
         <img src="https://muningbaru1-design.github.io/pelayanan-desa/logo-simunbar.png">
     </div>
 
-    <div class="clock">
+    <div>
         <div class="clock-time" id="jam"></div>
         <div class="clock-date" id="tanggal"></div>
     </div>
@@ -174,24 +139,21 @@ body {
 <div class="menu">
 
     <!-- BUKU TAMU -->
-    <div class="card" onclick="window.open('https://forms.gle/8ipvJkeh76VHPsAW8','_blank')">
+    <div class="card" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
         <img src="template-pelayanan.png">
         <h3>Buku Tamu 🔵 <span id="notifTamu">0</span></h3>
-        <button class="screen-btn" onclick="event.stopPropagation(); openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">Screen</button>
     </div>
 
     <!-- SURAT -->
-    <div class="card" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform','_blank')">
+    <div class="card" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')">
         <img src="template-pelayanan.png">
         <h3>Pelayanan Surat 🔴 <span id="notifSurat">0</span></h3>
-        <button class="screen-btn" onclick="event.stopPropagation(); openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')">Screen</button>
     </div>
 
     <!-- ADUAN -->
-    <div class="card" onclick="window.open('https://forms.gle/o864Q2Jdh42QEXRB7','_blank')">
+    <div class="card" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">
         <img src="template-pelayanan.png">
         <h3>Aduan & Saran 🔴 <span id="notifAduan">0</span></h3>
-        <button class="screen-btn" onclick="event.stopPropagation(); openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">Screen</button>
     </div>
 
 </div>
@@ -204,7 +166,7 @@ body {
 
 <!-- FOOTER -->
 <div class="footer">
-    © 2026 Desa Muning Baru - Melayani Sepenuh Hati
+    © 2026 Desa Muning Baru
 </div>
 
 <script>
@@ -212,11 +174,8 @@ body {
 /* JAM */
 function updateJam() {
     const now = new Date();
-
     document.getElementById("jam").innerText =
-        now.getHours().toString().padStart(2,'0') + ":" +
-        now.getMinutes().toString().padStart(2,'0') + ":" +
-        now.getSeconds().toString().padStart(2,'0');
+        now.toLocaleTimeString('id-ID');
 
     document.getElementById("tanggal").innerText =
         now.toLocaleDateString('id-ID', {
@@ -227,7 +186,6 @@ function updateJam() {
         });
 }
 setInterval(updateJam,1000);
-updateJam();
 
 /* MODAL */
 function openModal(link){
