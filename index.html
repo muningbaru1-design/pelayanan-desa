@@ -76,6 +76,51 @@ body {
     padding:15px;
 }
 
+/* TOMBOL SCREEN */
+.screen-btn {
+    display:block;
+    margin:10px auto 15px;
+    padding:8px 15px;
+    background:#00ffd5;
+    color:black;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.screen-btn:hover {
+    background:#00c2a5;
+}
+
+/* MODAL */
+.modal {
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    z-index:9999;
+}
+.modal iframe {
+    width:90%;
+    height:90%;
+    margin:3% auto;
+    display:block;
+    border:none;
+    background:white;
+    border-radius:10px;
+}
+.close {
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:30px;
+    color:white;
+    cursor:pointer;
+}
+
 /* TEXT BERJALAN */
 .marquee {
     background:#111;
@@ -105,18 +150,14 @@ body {
 
 <!-- NAVBAR -->
 <div class="navbar">
-
-    <!-- LOGO -->
     <div class="logo-box">
         <img src="https://muningbaru1-design.github.io/pelayanan-desa/logo-simunbar.png">
     </div>
 
-    <!-- JAM -->
     <div class="clock">
         <div class="clock-time" id="jam"></div>
         <div class="clock-date" id="tanggal"></div>
     </div>
-
 </div>
 
 <!-- HERO -->
@@ -136,20 +177,29 @@ body {
     <div class="card" onclick="window.open('https://forms.gle/8ipvJkeh76VHPsAW8','_blank')">
         <img src="template-pelayanan.png">
         <h3>Buku Tamu 🔵 <span id="notifTamu">0</span></h3>
+        <button class="screen-btn" onclick="event.stopPropagation(); openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">Screen</button>
     </div>
 
-    <!-- PELAYANAN SURAT -->
+    <!-- SURAT -->
     <div class="card" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform','_blank')">
         <img src="template-pelayanan.png">
         <h3>Pelayanan Surat 🔴 <span id="notifSurat">0</span></h3>
+        <button class="screen-btn" onclick="event.stopPropagation(); openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')">Screen</button>
     </div>
 
     <!-- ADUAN -->
     <div class="card" onclick="window.open('https://forms.gle/o864Q2Jdh42QEXRB7','_blank')">
         <img src="template-pelayanan.png">
         <h3>Aduan & Saran 🔴 <span id="notifAduan">0</span></h3>
+        <button class="screen-btn" onclick="event.stopPropagation(); openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">Screen</button>
     </div>
 
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+    <span class="close" onclick="closeModal()">✖</span>
+    <iframe id="frame"></iframe>
 </div>
 
 <!-- FOOTER -->
@@ -159,7 +209,7 @@ body {
 
 <script>
 
-/* JAM DIGITAL */
+/* JAM */
 function updateJam() {
     const now = new Date();
 
@@ -179,46 +229,32 @@ function updateJam() {
 setInterval(updateJam,1000);
 updateJam();
 
-/* NOTIFIKASI 3 SUMBER DATA */
+/* MODAL */
+function openModal(link){
+    document.getElementById("modal").style.display="block";
+    document.getElementById("frame").src=link;
+}
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+    document.getElementById("frame").src="";
+}
+
+/* NOTIFIKASI */
 async function ambilData() {
 
-  /* === BUKU TAMU === */
   const urlTamu = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTf0YY597JgnBlEeoq375PxbGMzpq0Eum3qF57iU-HvAG0GviT8x7Feh6pvwm16bVfbtGRVWiHTtln5/pub?gid=53317010&single=true&output=csv";
-  const resTamu = await fetch(urlTamu);
-  const textTamu = await resTamu.text();
-  const rowsTamu = textTamu.split("\n");
-  let jumlahTamu = rowsTamu.length - 1;
-
-  /* === SURAT === */
   const urlSurat = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv";
-  const resSurat = await fetch(urlSurat);
-  const textSurat = await resSurat.text();
-  const rowsSurat = textSurat.split("\n");
-
-  let jumlahSurat = 0;
-  for (let i = 1; i < rowsSurat.length; i++) {
-    let kolom = rowsSurat[i].replace(/"/g, '').split(",");
-    let isi = kolom[4];
-    if (isi && isi !== "") jumlahSurat++;
-  }
-
-  /* === ADUAN === */
   const urlAduan = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR_5xLKXz0SzzQgs-CTw7M3A5hiVZ2UyttODKK-vPFVvHup81fE_wLus-FWCXygXVxJ2te9Ni5FqSoD/pub?gid=1837680240&single=true&output=csv";
-  const resAduan = await fetch(urlAduan);
-  const textAduan = await resAduan.text();
-  const rowsAduan = textAduan.split("\n");
 
-  let jumlahAduan = 0;
-  for (let i = 1; i < rowsAduan.length; i++) {
-    let kolom = rowsAduan[i].replace(/"/g, '').split(",");
-    let isi = kolom[5];
-    if (isi && isi !== "") jumlahAduan++;
-  }
+  const [tamu, surat, aduan] = await Promise.all([
+    fetch(urlTamu).then(r=>r.text()),
+    fetch(urlSurat).then(r=>r.text()),
+    fetch(urlAduan).then(r=>r.text())
+  ]);
 
-  /* TAMPILKAN */
-  document.getElementById("notifTamu").innerText = jumlahTamu;
-  document.getElementById("notifSurat").innerText = jumlahSurat;
-  document.getElementById("notifAduan").innerText = jumlahAduan;
+  document.getElementById("notifTamu").innerText = tamu.split("\n").length - 1;
+  document.getElementById("notifSurat").innerText = surat.split("\n").length - 1;
+  document.getElementById("notifAduan").innerText = aduan.split("\n").length - 1;
 }
 
 ambilData();
