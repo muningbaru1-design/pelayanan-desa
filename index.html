@@ -36,6 +36,9 @@ body {
 /* HERO */
 .hero img {
     width:100%;
+    max-width:1200px;
+    display:block;
+    margin:auto;
 }
 
 /* MENU */
@@ -46,7 +49,6 @@ body {
     gap:20px;
     padding:30px;
 }
-
 .card {
     width:300px;
     border-radius:20px;
@@ -66,7 +68,7 @@ body {
     padding:15px;
 }
 
-/* MODAL (INI YANG DIPERTAHANKAN) */
+/* MODAL */
 .modal {
     display:none;
     position:fixed;
@@ -125,9 +127,28 @@ body {
     </div>
 </div>
 
-<!-- HERO -->
+<!-- HERO + HOTSPOT -->
 <div class="hero">
-    <img src="template-pelayanan.png">
+    <img src="template-pelayanan.png" usemap="#menuMap">
+
+    <map name="menuMap">
+
+        <!-- BUKU TAMU -->
+        <area shape="rect" coords="50,250,350,450"
+            href="javascript:void(0)"
+            onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
+
+        <!-- SURAT -->
+        <area shape="rect" coords="400,250,700,450"
+            href="javascript:void(0)"
+            onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')">
+
+        <!-- ADUAN -->
+        <area shape="rect" coords="750,250,1050,450"
+            href="javascript:void(0)"
+            onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">
+
+    </map>
 </div>
 
 <!-- TEXT BERJALAN -->
@@ -135,22 +156,19 @@ body {
     <marquee>SELAMAT DATANG DI PELAYANAN KANTOR DESA MUNING BARU</marquee>
 </div>
 
-<!-- MENU -->
+<!-- MENU BAWAH (TETAP ADA) -->
 <div class="menu">
 
-    <!-- BUKU TAMU -->
     <div class="card" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')">
         <img src="template-pelayanan.png">
         <h3>Buku Tamu 🔵 <span id="notifTamu">0</span></h3>
     </div>
 
-    <!-- SURAT -->
     <div class="card" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')">
         <img src="template-pelayanan.png">
         <h3>Pelayanan Surat 🔴 <span id="notifSurat">0</span></h3>
     </div>
 
-    <!-- ADUAN -->
     <div class="card" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">
         <img src="template-pelayanan.png">
         <h3>Aduan & Saran 🔴 <span id="notifAduan">0</span></h3>
