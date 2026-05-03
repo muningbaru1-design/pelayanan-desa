@@ -45,10 +45,18 @@ body{
     transform:translate(-50%, -50%);
 }
 
-/* POSISI */
+/* POSISI UTAMA */
 .tamu{ top:64%; left:21%; width:22%; height:26%; }
 .surat{ top:64%; left:50%; width:22%; height:26%; }
 .aduan{ top:64%; left:79%; width:22%; height:26%; }
+
+/* BERITA DESA (DI ATAS) */
+.berita{
+    top:28%;
+    left:50%;
+    width:28%;
+    height:18%;
+}
 
 /* GLOW */
 .icon-area::before{
@@ -180,12 +188,18 @@ Admin
 </div>
 </div>
 
+<!-- HERO -->
 <div class="hero-wrap">
 <img src="template-pelayanan.png" class="hero-img">
 
+<!-- HOTSPOT UTAMA -->
 <div class="icon-area tamu" onclick="openModal('https://forms.gle/8ipvJkeh76VHPsAW8')"></div>
 <div class="icon-area surat" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')"></div>
 <div class="icon-area aduan" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
+
+<!-- 📰 BERITA DESA -->
+<div class="icon-area berita" onclick="openBerita()"></div>
+
 </div>
 
 <div class="cek-status">
@@ -215,12 +229,6 @@ Admin
 <h3>Aduan 🔴 <span id="notifAduan">0</span></h3>
 </div>
 
-<!-- 📰 BERITA DESA -->
-<div class="card" onclick="openBerita()">
-<img src="template-pelayanan.png">
-<h3>Berita Desa 🟢</h3>
-</div>
-
 </div>
 
 <div id="modal" class="modal">
@@ -228,7 +236,7 @@ Admin
 <iframe id="frame"></iframe>
 </div>
 
-<!-- ADMIN PANEL (tetap sama) -->
+<!-- ADMIN PANEL -->
 <div id="adminPanel" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;">
 <div style="background:#111;width:300px;padding:20px;border-radius:12px;text-align:center;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
 <h3>Login Admin</h3>
@@ -247,6 +255,8 @@ Admin
 <div class="footer">© 2026 Desa Muning Baru</div>
 
 <script>
+
+/* JAM */
 function updateJam(){
 const now=new Date();
 document.getElementById("jam").innerText=now.toLocaleTimeString('id-ID');
@@ -316,6 +326,7 @@ if(x==2) window.open("https://docs.google.com/spreadsheets/d/1GimNzY0IiloawXkKdh
 if(x==3) window.open("https://docs.google.com/spreadsheets/d/1CSXWRzMxMTvWwyNid3pod8KEgSYJiwhi2BS_bPvY6nc/edit","_blank");
 if(x==4) window.open("https://drive.google.com/drive/my-drive","_blank");
 }
+
 </script>
 
 </body>
