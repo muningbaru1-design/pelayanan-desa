@@ -17,6 +17,7 @@ body{
 .navbar{
     display:flex;
     justify-content:space-between;
+    align-items:center;
     padding:15px 30px;
     background:#111;
 }
@@ -25,6 +26,17 @@ body{
 /* JAM */
 .clock-time{font-size:26px;color:#00ffd5}
 .clock-date{font-size:14px}
+
+/* ADMIN */
+.admin-btn{
+    background:#00ffd5;
+    border:none;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-left:10px;
+}
 
 /* HERO */
 .hero-wrap{
@@ -57,20 +69,8 @@ body{
     inset:0;
     border-radius:28px;
     background:rgba(0,255,213,0.10);
-    box-shadow:
-        0 0 12px rgba(0,255,213,0.35),
-        0 0 22px rgba(0,255,213,0.15);
+    box-shadow:0 0 12px rgba(0,255,213,0.35);
     opacity:0.6;
-    transition:0.3s;
-}
-.icon-area:hover::before{
-    box-shadow:
-        0 0 20px rgba(0,255,213,0.6),
-        0 0 35px rgba(0,255,213,0.25);
-    opacity:1;
-}
-.icon-area:active{
-    transform:translate(-50%, -50%) scale(0.97);
 }
 
 /* CEK STATUS */
@@ -90,25 +90,11 @@ body{
     border-radius:8px;
     background:#00ffd5;
     cursor:pointer;
-    font-weight:bold;
-}
-#hasilStatus{
-    margin-top:10px;
-    font-weight:bold;
-}
-
-/* MARQUEE */
-.marquee{
-    background:#111;
-    padding:10px;
-    text-align:center;
-    color:#00ffd5;
 }
 
 /* MENU */
 .menu{
     display:flex;
-    flex-wrap:wrap;
     justify-content:center;
     gap:20px;
     padding:30px;
@@ -118,9 +104,7 @@ body{
     border-radius:20px;
     overflow:hidden;
     cursor:pointer;
-    transition:0.3s;
 }
-.card:hover{transform:scale(1.05)}
 .card img{width:100%}
 .card h3{text-align:center;padding:15px}
 
@@ -128,8 +112,6 @@ body{
 .modal{
     display:none;
     position:fixed;
-    top:0;
-    left:0;
     width:100%;
     height:100%;
     background:rgba(0,0,0,0.9);
@@ -147,12 +129,6 @@ body{
     font-size:30px;
     cursor:pointer;
 }
-
-.footer{
-    text-align:center;
-    padding:20px;
-    background:#111;
-}
 </style>
 </head>
 
@@ -162,9 +138,11 @@ body{
 <div class="logo-box">
 <img src="https://muningbaru1-design.github.io/pelayanan-desa/logo-simunbar.png">
 </div>
+
 <div>
 <div class="clock-time" id="jam"></div>
 <div class="clock-date" id="tanggal"></div>
+<button class="admin-btn" onclick="loginAdmin()">Admin</button>
 </div>
 </div>
 
@@ -176,15 +154,10 @@ body{
 <div class="icon-area aduan" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')"></div>
 </div>
 
-<!-- CEK STATUS -->
 <div class="cek-status">
 <input type="text" id="cari" placeholder="Masukkan Nama / NIK">
-<button onclick="cekStatus()">Cek Status Surat</button>
+<button onclick="cekStatus()">Cek Status</button>
 <div id="hasilStatus"></div>
-</div>
-
-<div class="marquee">
-<marquee>SELAMAT DATANG DI PELAYANAN DESA MUNING BARU</marquee>
 </div>
 
 <div class="menu">
@@ -195,7 +168,7 @@ body{
 
 <div class="card" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScJu578Dd6od4C4VFW0JGOAGXkk9lDIgeb5TDE0qj6FBRWgNQ/viewform')">
 <img src="template-pelayanan.png">
-<h3>Pelayanan Surat 🔴 <span id="notifSurat">0</span></h3>
+<h3>Surat 🔴 <span id="notifSurat">0</span></h3>
 </div>
 
 <div class="card" onclick="openModal('https://forms.gle/o864Q2Jdh42QEXRB7')">
@@ -209,9 +182,9 @@ body{
 <iframe id="frame"></iframe>
 </div>
 
-<div class="footer">© 2026 Desa Muning Baru</div>
-
 <script>
+
+/* JAM */
 function updateJam(){
 const now=new Date();
 document.getElementById("jam").innerText=now.toLocaleTimeString('id-ID');
@@ -248,16 +221,39 @@ async function cekStatus(){
 const keyword=document.getElementById("cari").value.toLowerCase();
 const data=await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv").then(r=>r.text());
 
-const rows=data.split("\n");
 let hasil="Data tidak ditemukan";
-
-for(let i=1;i<rows.length;i++){
-if(rows[i].toLowerCase().includes(keyword)){
-hasil="Status: "+rows[i];
-break;
+data.split("\n").forEach(row=>{
+if(row.toLowerCase().includes(keyword)){
+hasil="Status: "+row;
 }
-}
+});
 document.getElementById("hasilStatus").innerText=hasil;
+}
+
+/* ADMIN */
+function loginAdmin(){
+let pin=prompt("Masukkan PIN Admin:");
+
+if(pin==="12345"){ // GANTI PIN
+
+let pilih=prompt("1=Tamu\n2=Surat\n3=Aduan\n4=Semua");
+
+if(pilih=="1"){
+window.open("https://docs.google.com/spreadsheets/d/e/2PACX-1vTf0YY597JgnBlEeoq375PxbGMzpq0Eum3qF57iU-HvAG0GviT8x7Feh6pvwm16bVfbtGRVWiHTtln5","_blank");
+}
+else if(pilih=="2"){
+window.open("https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io","_blank");
+}
+else if(pilih=="3"){
+window.open("https://docs.google.com/spreadsheets/d/e/2PACX-1vR_5xLKXz0SzzQgs-CTw7M3A5hiVZ2UyttODKK-vPFVvHup81fE_wLus-FWCXygXVxJ2te9Ni5FqSoD","_blank");
+}
+else if(pilih=="4"){
+window.open("https://drive.google.com","_blank");
+}
+
+}else{
+alert("PIN salah!");
+}
 }
 </script>
 
