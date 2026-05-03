@@ -159,7 +159,7 @@ body {
 
 <script>
 
-/* JAM */
+/* JAM DIGITAL */
 function updateJam() {
     const now = new Date();
 
@@ -179,30 +179,46 @@ function updateJam() {
 setInterval(updateJam,1000);
 updateJam();
 
-/* NOTIFIKASI */
+/* NOTIFIKASI 3 SUMBER DATA */
 async function ambilData() {
 
-  const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv";
+  /* === BUKU TAMU === */
+  const urlTamu = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTf0YY597JgnBlEeoq375PxbGMzpq0Eum3qF57iU-HvAG0GviT8x7Feh6pvwm16bVfbtGRVWiHTtln5/pub?gid=53317010&single=true&output=csv";
+  const resTamu = await fetch(urlTamu);
+  const textTamu = await resTamu.text();
+  const rowsTamu = textTamu.split("\n");
+  let jumlahTamu = rowsTamu.length - 1;
 
-  const res = await fetch(url);
-  const text = await res.text();
+  /* === SURAT === */
+  const urlSurat = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv";
+  const resSurat = await fetch(urlSurat);
+  const textSurat = await resSurat.text();
+  const rowsSurat = textSurat.split("\n");
 
-  const rows = text.split("\n");
-
-  let tamu = rows.length - 1;
-  let surat = 0;
-  let aduan = 0;
-
-  for (let i = 1; i < rows.length; i++) {
-    let data = rows[i].toLowerCase();
-
-    if (data.includes("surat")) surat++;
-    if (data.includes("aduan") || data.includes("saran")) aduan++;
+  let jumlahSurat = 0;
+  for (let i = 1; i < rowsSurat.length; i++) {
+    let kolom = rowsSurat[i].replace(/"/g, '').split(",");
+    let isi = kolom[4];
+    if (isi && isi !== "") jumlahSurat++;
   }
 
-  document.getElementById("notifTamu").innerText = tamu;
-  document.getElementById("notifSurat").innerText = surat;
-  document.getElementById("notifAduan").innerText = aduan;
+  /* === ADUAN === */
+  const urlAduan = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR_5xLKXz0SzzQgs-CTw7M3A5hiVZ2UyttODKK-vPFVvHup81fE_wLus-FWCXygXVxJ2te9Ni5FqSoD/pub?gid=1837680240&single=true&output=csv";
+  const resAduan = await fetch(urlAduan);
+  const textAduan = await resAduan.text();
+  const rowsAduan = textAduan.split("\n");
+
+  let jumlahAduan = 0;
+  for (let i = 1; i < rowsAduan.length; i++) {
+    let kolom = rowsAduan[i].replace(/"/g, '').split(",");
+    let isi = kolom[5];
+    if (isi && isi !== "") jumlahAduan++;
+  }
+
+  /* TAMPILKAN */
+  document.getElementById("notifTamu").innerText = jumlahTamu;
+  document.getElementById("notifSurat").innerText = jumlahSurat;
+  document.getElementById("notifAduan").innerText = jumlahAduan;
 }
 
 ambilData();
