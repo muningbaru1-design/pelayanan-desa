@@ -333,10 +333,31 @@ alert("PIN salah!");
 }
 }
 function goAdmin(x){
-if(x==1) location.href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTf0YY597JgnBlEeoq375PxbGMzpq0Eum3qF57iU-HvAG0GviT8x7Feh6pvwm16bVfbtGRVWiHTtln5";
-if(x==2) location.href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io";
-if(x==3) location.href="https://docs.google.com/spreadsheets/d/e/2PACX-1vR_5xLKXz0SzzQgs-CTw7M3A5hiVZ2UyttODKK-vPFVvHup81fE_wLus-FWCXygXVxJ2te9Ni5FqSoD";
-if(x==4) location.href="https://drive.google.com";
+
+// 📋 Buku Tamu
+if(x==1) window.open(
+"https://docs.google.com/spreadsheets/d/1wXSSNQZdIGYdBOCNST6ec9P7QkmGC0XlsKqNHWF4zkA/edit",
+"_blank"
+);
+
+// 📄 Pelayanan Surat
+if(x==2) window.open(
+"https://docs.google.com/spreadsheets/d/1GimNzY0IiloawXkKdhJsxmI4Z_LpoFJCgYj0icam5TU/edit",
+"_blank"
+);
+
+// 🚨 Aduan & Saran
+if(x==3) window.open(
+"https://docs.google.com/spreadsheets/d/1CSXWRzMxMTvWwyNid3pod8KEgSYJiwhi2BS_bPvY6nc/edit",
+"_blank"
+);
+
+// 🗂 Semua Data (Drive)
+if(x==4) window.open(
+"https://drive.google.com/drive/my-drive",
+"_blank"
+);
+
 }
 </script>
 
