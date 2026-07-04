@@ -284,7 +284,14 @@ document.getElementById("modal").style.display="block";
 document.getElementById("frame").src=link;
 }
 function closeModal(){
-document.getElementById("modal").style.display="none";
+    document.getElementById("frame").src="";
+    document.getElementById("modal").style.display="none";
+}
+window.onclick = function(event){
+    const modal = document.getElementById("modal");
+    if(event.target == modal){
+        closeModal();
+    }
 }
 
 /* BERITA */
