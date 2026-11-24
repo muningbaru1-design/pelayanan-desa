@@ -335,7 +335,7 @@ alert("PIN salah!");
 function goAdmin(x){
 if(x==1) window.open("https://docs.google.com/spreadsheets/d/1dw-VnRiVrbuBX3xIx-ee6Gz6xoPNcg8nZJTRWEBuZBE/edit","_blank");
 if(x==2) window.open("https://docs.google.com/spreadsheets/d/1GimNzY0IiloawXkKdhJsxmI4Z_LpoFJCgYj0icam5TU/edit","_blank");
-if(x==3) window.open("https://docs.google.com/spreadsheets/d/1CSXWRzMxMTvWwyNid3pod8KEgSYJiwhi2BS_bPvY6nc/edit","_blank");
+if(x==3) window.open("https://docs.google.com/spreadsheets/d/1h2mc-a6GNiMSdZ_aMp6TOsHBH5XLpBdwpAJY_LitIvk/edit"); 
 if(x==4) window.open("https://drive.google.com/drive/my-drive","_blank");
 }
 
@@ -344,7 +344,7 @@ async function ambilData(){
 const [tamu,surat,aduan]=await Promise.all([
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTf0YY597JgnBlEeoq375PxbGMzpq0Eum3qF57iU-HvAG0GviT8x7Feh6pvwm16bVfbtGRVWiHTtln5/pub?gid=53317010&single=true&output=csv").then(r=>r.text()),
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vSNSqZmr8mhDwdRlNFZUvnKE9MRyT5zFKi4YiNXWukqp6zZuoCRoluLdBtgMBpJEZ84xI0Oc9cuo4Io/pub?gid=595147775&single=true&output=csv").then(r=>r.text()),
-fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vR_5xLKXz0SzzQgs-CTw7M3A5hiVZ2UyttODKK-vPFVvHup81fE_wLus-FWCXygXVxJ2te9Ni5FqSoD/pub?gid=1837680240&single=true&output=csv").then(r=>r.text())
+fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vQkHf56x_e0WyMaNoamrz91J43Jj3LFjLc-6M6ZTcHiN-E60rLEBd6ev0MzNyMlkVrO0XKNo9V91Ki3/pub?gid=0&single=true&output=csv").then(r=>r.text())
 ]);
 
 document.getElementById("notifTamu").innerText=tamu.split("\n").length-1;
